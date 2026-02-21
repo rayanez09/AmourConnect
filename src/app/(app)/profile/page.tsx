@@ -9,11 +9,13 @@ export default async function MyProfileRedirectPage() {
         redirect('/auth/login')
     }
 
-    const { data: profile } = await supabase
+    const { data } = await supabase
         .from('profiles')
         .select('id')
         .eq('user_id', user.id)
         .single()
+
+    const profile = data as { id: string } | null
 
     if (profile) {
         redirect(`/profile/${profile.id}`)
