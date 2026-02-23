@@ -130,7 +130,7 @@ export default function HomePage() {
             <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/30">
               <Heart className="h-5 w-5 text-white fill-white" />
             </div>
-            <span className="text-xl font-bold">Amour<span className="text-rose-500">Connect</span></span>
+            <span className="text-xl font-bold">Ecoute et <span className="text-rose-500">Orientation</span></span>
           </Link>
           <div className="flex items-center gap-3">
             <Link href="/auth/login" className="hidden sm:block text-slate-300 hover:text-white text-sm font-medium transition-colors">
@@ -367,7 +367,7 @@ export default function HomePage() {
                 <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
                   <Heart className="h-4 w-4 text-white fill-white" />
                 </div>
-                <span className="font-bold text-white">Amour<span className="text-rose-500">Connect</span></span>
+                <span className="font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
               </div>
               <p className="text-slate-400 text-sm">Rencontres sérieuses pour adultes en France.</p>
             </div>

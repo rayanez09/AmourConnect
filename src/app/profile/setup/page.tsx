@@ -145,7 +145,7 @@ export default function ProfileSetupPage() {
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
                             <Heart className="h-6 w-6 text-white fill-white" />
                         </div>
-                        <span className="text-2xl font-bold text-white">Amour<span className="text-rose-500">Connect</span></span>
+                        <span className="text-2xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
                     </div>
                     <p className="text-slate-400 mt-2">Créez votre profil en quelques étapes</p>
                 </div>

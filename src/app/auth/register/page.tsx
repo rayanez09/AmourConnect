@@ -82,7 +82,7 @@ export default function RegisterPage() {
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg">
                             <Heart className="h-6 w-6 text-white fill-white" />
                         </div>
-                        <span className="text-2xl font-bold text-white">Amour<span className="text-rose-500">Connect</span></span>
+                        <span className="text-2xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
                     </Link>
                     <h1 className="text-3xl font-bold text-white">Créer un compte</h1>
                     <p className="text-slate-400 mt-2">

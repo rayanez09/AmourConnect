@@ -61,7 +61,7 @@ export function AppNavbar() {
                     <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/30">
                         <Heart className="h-5 w-5 text-white fill-white" />
                     </div>
-                    <span className="text-xl font-bold text-white">Amour<span className="text-rose-500">Connect</span></span>
+                    <span className="text-xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
                 </Link>
 
                 {/* Nav links */}
