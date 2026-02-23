@@ -11,14 +11,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'AmourConnect – Rencontres sérieuses en ligne',
-    template: '%s | AmourConnect',
+    default: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
+    template: '%s | Ecoute et Orientation',
   },
   description:
-    "Rejoignez AmourConnect, la plateforme de rencontres sérieuses pour adultes. Créez votre profil, rencontrez des personnes compatibles et échangez en toute sécurité.",
+    "Rejoignez Ecoute et Orientation, la plateforme de rencontres sérieuses pour adultes. Créez votre profil, rencontrez des personnes compatibles et échangez en toute sécurité.",
   keywords: ['rencontre', 'site de rencontre', 'célibataire', 'amour', 'relation sérieuse'],
-  authors: [{ name: 'AmourConnect' }],
-  creator: 'AmourConnect',
+  authors: [{ name: 'Ecoute et Orientation' }],
+  creator: 'Ecoute et Orientation',
   robots: {
     index: true,
     follow: true,
@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    title: 'AmourConnect – Rencontres sérieuses en ligne',
-    description: 'Trouvez votre âme sœur sur AmourConnect.',
-    siteName: 'AmourConnect',
+    title: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
+    description: 'Trouvez votre âme sœur sur Ecoute et Orientation.',
+    siteName: 'Ecoute et Orientation',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AmourConnect – Rencontres sérieuses en ligne',
-    description: 'Trouvez votre âme sœur sur AmourConnect.',
+    title: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
+    description: 'Trouvez votre âme sœur sur Ecoute et Orientation.',
   },
   verification: {
     google: '',

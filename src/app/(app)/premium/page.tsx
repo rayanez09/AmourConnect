@@ -3,7 +3,7 @@ import { Crown, Check, Zap, Heart, Star, Shield, Eye, MessageCircle } from 'luci
 import { Button } from '@/components/ui/Button'
 import type { Metadata } from 'next'
 
-export const metadata: Metadata = { title: 'Premium – AmourConnect' }
+export const metadata: Metadata = { title: 'Premium – Ecoute et Orientation' }
 
 const premiumFeatures = [
     { icon: Eye, label: 'Voir qui vous a liké', desc: 'Découvrez tous ceux qui ont liké votre profil.' },
@@ -59,8 +59,8 @@ export default function PremiumPage() {
                     <div
                         key={plan.period}
                         className={`relative rounded-2xl border p-6 text-center ${plan.badge
-                                ? 'border-amber-500/50 bg-gradient-to-br from-amber-900/20 to-yellow-900/10'
-                                : 'border-slate-800 bg-slate-900'
+                            ? 'border-amber-500/50 bg-gradient-to-br from-amber-900/20 to-yellow-900/10'
+                            : 'border-slate-800 bg-slate-900'
                             }`}
                     >
                         {plan.badge && (

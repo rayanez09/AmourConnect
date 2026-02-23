@@ -68,7 +68,7 @@ export default async function SettingsPage() {
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-amber-500/10 rounded-lg"><Heart className="h-5 w-5 text-amber-500" /></div>
                                 <div>
-                                    <h3 className="text-white font-medium">AmourConnect Premium</h3>
+                                    <h3 className="text-white font-medium">Ecoute et Orientation Premium</h3>
                                     <p className="text-sm text-slate-400">Gérer votre abonnement exclusif</p>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@ export default async function SettingsPage() {
 
                 {/* Log Out Box */}
                 <div className="pt-8">
-                    <p className="text-sm text-slate-500 text-center mb-4">Version 0.1.0 — AmourConnect</p>
+                    <p className="text-sm text-slate-500 text-center mb-4">Version 0.1.0 — Ecoute et Orientation</p>
                 </div>
             </div>
         </div>

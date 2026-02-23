@@ -1,5 +1,5 @@
 -- ============================================================
--- AMOURCONNECT - Schéma SQL Supabase complet
+-- ECOUTE ET ORIENTATION - Schéma SQL Supabase complet
 -- À exécuter dans l'éditeur SQL de Supabase
 -- ============================================================
 

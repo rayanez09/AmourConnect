@@ -132,7 +132,7 @@ export default function ProfileSetupPage() {
             setProfile(updated)
         }
 
-        success('Profil mis à jour !', 'Bienvenue sur AmourConnect 🎉')
+        success('Profil mis à jour !', 'Bienvenue sur Ecoute et Orientation 🎉')
         router.push('/dashboard')
     }
 

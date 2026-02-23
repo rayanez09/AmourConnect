@@ -1,4 +1,4 @@
-# AmourConnect 💕
+# Ecoute et Orientation 💕
 
 Plateforme de rencontres sérieuses professionnelle construite avec Next.js 15, Supabase et TailwindCSS.
 

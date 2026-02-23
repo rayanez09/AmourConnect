@@ -1,5 +1,5 @@
 /**
- * AmourConnect - Script de seed
+ * Ecoute et Orientation - Script de seed
  * Génère 50 profils fictifs dans Supabase
  *
  * Usage:
@@ -118,7 +118,7 @@ async function seed() {
         const age = randomInt(22, 52)
         const location = pickRandom(FRENCH_CITIES)
         const bio = bios[i % bios.length]
-        const email = `seed_user_${i + 1}_${Date.now()}@amourconnect-seed.dev`
+        const email = `seed_user_${i + 1}_${Date.now()}@ecoute-et-orientation-seed.dev`
         const password = 'SeedPassword123!'
 
         try {
@@ -179,7 +179,7 @@ async function seed() {
     }
 
     console.log('\n📌 Login credentials for test users:')
-    console.log('   Email: seed_user_1_[timestamp]@amourconnect-seed.dev')
+    console.log('   Email: seed_user_1_[timestamp]@ecoute-et-orientation-seed.dev')
     console.log('   Password: SeedPassword123!')
     console.log('\n💡 Check your Supabase dashboard > Authentication > Users to see all created accounts.')
 }

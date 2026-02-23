@@ -16,8 +16,8 @@ import { Card, CardContent } from '@/components/ui/Card'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AmourConnect – Rencontres sérieuses en ligne',
-  description: 'Trouvez votre âme sœur sur AmourConnect. Plateforme de rencontres sécurisée et sérieuse pour adultes en France.',
+  title: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
+  description: 'Trouvez votre âme sœur sur Ecoute et Orientation. Plateforme de rencontres sécurisée et sérieuse pour adultes en France.',
 }
 
 const features = [
@@ -104,7 +104,7 @@ const testimonials = [
     name: 'Sophie M.',
     age: 32,
     city: 'Lyon',
-    text: "J'ai rencontré mon compagnon sur AmourConnect il y a 8 mois. L'interface est tellement intuitive et les profils sont sérieux !",
+    text: "J'ai rencontré mon compagnon sur Ecoute et Orientation il y a 8 mois. L'interface est tellement intuitive et les profils sont sérieux !",
   },
   {
     name: 'Thomas R.',
@@ -166,7 +166,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-            AmourConnect réunit des célibataires sérieux qui cherchent une vraie relation.
+            Ecoute et Orientation réunit des célibataires sérieux qui cherchent une vraie relation.
             Profils vérifiés, messagerie sécurisée et matching intelligent.
           </p>
 
@@ -266,8 +266,8 @@ export default function HomePage() {
               <div
                 key={plan.name}
                 className={`relative rounded-2xl border p-8 ${plan.popular
-                    ? 'border-rose-500/50 bg-gradient-to-br from-rose-900/20 to-pink-900/20'
-                    : 'border-slate-800 bg-slate-900'
+                  ? 'border-rose-500/50 bg-gradient-to-br from-rose-900/20 to-pink-900/20'
+                  : 'border-slate-800 bg-slate-900'
                   }`}
               >
                 {plan.popular && (
@@ -396,7 +396,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-slate-500 text-sm">© 2024 AmourConnect. Tous droits réservés.</p>
+            <p className="text-slate-500 text-sm">© 2024 Ecoute et Orientation. Tous droits réservés.</p>
             <p className="text-slate-500 text-sm flex items-center gap-1">
               Réservé aux adultes de 18 ans et plus
               <Shield className="h-4 w-4 text-slate-600" />
