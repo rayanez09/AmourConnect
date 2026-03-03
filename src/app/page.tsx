@@ -120,6 +120,26 @@ const testimonials = [
   },
 ]
 
+const marqueeImages = [
+  "/photos/Cute Black Guy.jpg",
+  "/photos/télécharger (10).jpg",
+  "/photos/télécharger (8).jpg",
+  "/photos/télécharger (15).jpg",
+  "/photos/Tresse africaine _ 20 modèles tendances en fonction de la longueur de vos cheveux.jpg",
+  "/photos/télécharger (14).jpg",
+  "/photos/télécharger (6).jpg",
+  "/photos/Handsome Man.jpg",
+  "/photos/télécharger (11).jpg",
+  "/photos/télécharger (4).jpg",
+  "/photos/télécharger (13).jpg",
+  "/photos/télécharger (7).jpg",
+  "/photos/where_🔍.jpg",
+  "/photos/télécharger (5).jpg",
+  "/photos/télécharger (16).jpg",
+  "/photos/télécharger (9).jpg",
+  "/photos/télécharger (12).jpg",
+]
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -381,6 +401,28 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Infinite Scroll Photo Marquee */}
+      <section className="py-16 border-t border-slate-800/50 bg-slate-950 relative overflow-hidden">
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 0.5rem)); }
+          }
+          .animate-marquee {
+            animation: marquee 50s linear infinite;
+          }
+          `
+        }} />
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] gap-4">
+          {[...marqueeImages, ...marqueeImages].map((img, i) => (
+            <div key={i} className="w-[160px] sm:w-[240px] shrink-0 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 hover:border-rose-500/50 transition-colors opacity-90 hover:opacity-100">
+              <img src={img} alt="Profil africain" className="w-full h-full object-cover object-top" />
+            </div>
+          ))}
         </div>
       </section>
 
