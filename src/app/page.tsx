@@ -124,78 +124,128 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/30">
-              <Heart className="h-5 w-5 text-white fill-white" />
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl shadow-lg shadow-slate-900/20">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/40 group-hover:scale-105 transition-transform">
+              <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white fill-white" />
             </div>
-            <span className="text-xl font-bold">Ecoute et <span className="text-rose-500">Orientation</span></span>
+            <span className="text-lg sm:text-2xl font-black tracking-tight">Ecoute et <span className="text-rose-500">Orientation</span></span>
           </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/auth/login" className="hidden sm:block text-slate-300 hover:text-white text-sm font-medium transition-colors">
-              Connexion
-            </Link>
-            <Button variant="primary" size="sm" asChild>
-              <Link href="/auth/register">Rejoindre gratuitement</Link>
+          <div className="flex items-center gap-3 sm:gap-6">
+            <Button variant="primary" asChild className="text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3 h-auto font-bold shadow-lg shadow-rose-500/20 hover:shadow-rose-500/40 bg-gradient-to-r from-rose-500 to-pink-600 text-white border-none">
+              <Link href="/auth/login">Se connecter</Link>
             </Button>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+      <section className="pt-24 pb-16 sm:pt-32 sm:pb-24 px-4 relative overflow-hidden min-h-[95vh] flex flex-col items-center justify-center z-10">
         {/* Background glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 h-96 w-96 bg-rose-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute top-1/3 right-1/4 h-80 w-80 bg-pink-500/10 rounded-full blur-3xl translate-x-1/2" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center z-0">
+          <div className="absolute top-1/4 left-1/4 h-[600px] w-[600px] bg-rose-500/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute top-1/3 right-1/4 h-[500px] w-[500px] bg-pink-500/10 rounded-full blur-3xl translate-x-1/2" />
         </div>
 
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-400 text-sm font-medium mb-6">
-            <Zap className="h-4 w-4" />
-            Nouvelle façon de rencontrer
+        {/* Free-floating Mockup Cards (Tinder Style) placed behind the text */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-visible">
+          {/* Left Card */}
+          <div className="absolute top-[5%] sm:top-[15%] left-[-15%] sm:left-[5%] md:left-[10%] lg:left-[15%] w-40 sm:w-64 md:w-72 aspect-[3/4] rounded-xl sm:rounded-2xl md:rounded-3xl border border-slate-700/50 bg-slate-900 overflow-hidden transform -rotate-12 shadow-[0_0_50px_rgba(244,63,94,0.3)] opacity-80 sm:opacity-90 transition-transform duration-1000">
+            <img src="/photos/p1.jpg" alt="Profil 1" className="w-full h-full object-cover object-top" />
+            <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-slate-950 to-transparent p-2 sm:p-4 flex flex-col justify-end">
+              <div className="flex gap-1 sm:gap-2 mb-1 sm:mb-2 justify-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-800 flex items-center justify-center text-rose-500 shadow-lg shadow-rose-500/20"><Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" /></div>
+              </div>
+            </div>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-            Trouvez votre{' '}
-            <span className="bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent">
-              âme sœur
-            </span>
-            <br />en toute confiance
+          {/* Right Card */}
+          <div className="absolute top-[15%] sm:top-[25%] lg:top-[30%] right-[-15%] sm:right-[5%] md:right-[10%] lg:right-[15%] w-40 sm:w-64 md:w-72 aspect-[3/4] rounded-xl sm:rounded-2xl md:rounded-3xl border border-slate-700/50 bg-slate-900 overflow-hidden transform rotate-12 shadow-[0_0_50px_rgba(236,72,153,0.3)] opacity-80 sm:opacity-90 transition-transform duration-1000">
+            <img src="/photos/p2.jpg" alt="Profil 2" className="w-full h-full object-cover object-top" />
+            <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-slate-950 to-transparent p-2 sm:p-4 flex flex-col justify-end">
+              <div className="flex gap-1 sm:gap-2 mb-1 sm:mb-2 justify-center">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-800 flex items-center justify-center text-rose-500 shadow-lg shadow-rose-500/20"><Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" /></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Center Top Card */}
+          <div className="absolute top-[-5%] sm:top-[-10%] md:top-[0%] left-1/2 -translate-x-1/2 w-56 sm:w-64 md:w-80 aspect-[3/4] rounded-2xl md:rounded-3xl border border-slate-700/50 bg-slate-900 overflow-hidden transform rotate-[-6deg] shadow-[0_0_50px_rgba(0,0,0,0.6)] opacity-80 transition-transform duration-1000 hidden sm:block">
+            <img src="/photos/p3.jpg" alt="Profil 3" className="w-full h-full object-cover object-[center_30%]" />
+            <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-slate-950 to-transparent" />
+          </div>
+        </div>
+
+        {/* Central Text Content */}
+        <div className="relative max-w-4xl mx-auto text-center z-20 p-4 sm:p-8 mt-32 sm:mt-16 w-full">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-rose-500/40 bg-rose-500/20 text-rose-300 text-[10px] sm:text-sm font-semibold mb-6 backdrop-blur-md shadow-lg whitespace-nowrap">
+            <Zap className="h-4 w-4" />
+            Le 1er réseau de rencontres en Afrique
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black leading-tight mb-4 sm:mb-6 tracking-tight">
+            Vivez l'<span className="bg-gradient-to-r from-rose-400 to-pink-500 bg-clip-text text-transparent drop-shadow-sm">Amour Vrai</span>
+            <br />près de chez vous
           </h1>
 
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-            Ecoute et Orientation réunit des célibataires sérieux qui cherchent une vraie relation.
-            Profils vérifiés, messagerie sécurisée et matching intelligent.
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8 font-medium px-2">
+            Rencontrez des personnes authentiques au Togo et dans toute l'Afrique. Glissez. Matchez. Discutez. C'est aussi simple que ça.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" asChild className="text-base px-8">
-              <Link href="/auth/register" className="gap-2">
-                Créer mon profil gratuit
-                <ArrowRight className="h-5 w-5" />
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full px-4 sm:px-0">
+            <Button size="lg" asChild className="text-base sm:text-lg w-full sm:w-auto px-6 sm:px-10 py-5 sm:py-6 h-auto shadow-[0_0_40px_rgba(244,63,94,0.3)] hover:shadow-[0_0_60px_rgba(244,63,94,0.5)] transition-shadow">
+              <Link href="/auth/register" className="gap-2 font-bold justify-center">
+                Créer mon compte
+                <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
               </Link>
             </Button>
-            <Button variant="secondary" size="lg" asChild className="text-base px-8">
-              <Link href="/auth/login">Se connecter</Link>
+            <Button variant="primary" size="lg" asChild className="text-base sm:text-lg w-full sm:w-auto px-6 sm:px-10 py-5 sm:py-6 h-auto bg-gradient-to-r from-rose-500 to-pink-600 border-none shadow-[0_0_40px_rgba(244,63,94,0.3)] hover:shadow-[0_0_60px_rgba(244,63,94,0.5)] transition-all">
+              <Link href="/auth/login" className="font-bold text-white justify-center">Se connecter</Link>
             </Button>
           </div>
 
-          <p className="mt-4 text-sm text-slate-500">
-            Gratuit · Sans engagement · Données protégées
+          <p className="mt-6 text-sm text-slate-400 font-medium tracking-wide uppercase">
+            Inscrivez-vous gratuitement • Rencontres Sécurisées
           </p>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 border-y border-slate-800 bg-slate-900/50">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
-            {stats.map(({ value, label }) => (
-              <div key={label}>
-                <div className="text-3xl font-bold text-white mb-1">{value}</div>
-                <div className="text-slate-400 text-sm">{label}</div>
+      {/* How it works */}
+      <section className="py-24 px-4 bg-slate-900/40 relative overflow-hidden">
+        {/* Floating background photos for ambiance */}
+        <div className="absolute top-10 left-10 w-32 h-32 rounded-3xl overflow-hidden opacity-20 transform -rotate-6 blur-[1px] hidden lg:block">
+          <img src="/photos/Cute Black Guy.jpg" alt="Ambiance" className="w-full h-full object-cover" />
+        </div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full overflow-hidden opacity-20 transform rotate-12 blur-[1px] hidden lg:block">
+          <img src="/photos/Handsome Man.jpg" alt="Ambiance" className="w-full h-full object-cover" />
+        </div>
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Comment ça marche ?</h2>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-8 relative">
+            {/* Connecting line for desktop */}
+            <div className="hidden sm:block absolute top-[40px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-rose-500/30 to-transparent -z-10" />
+
+            {[
+              { step: '1', title: 'Créez votre profil', desc: 'Inscrivez-vous gratuitement et remplissez votre profil en quelques minutes.', emoji: '📝', img: '/photos/télécharger (9).jpg' },
+              { step: '2', title: 'Découvrez des profils', desc: 'Parcourez les profils près de vous et likez ceux qui vous correspondent.', emoji: '❤️', img: '/photos/télécharger (13).jpg' },
+              { step: '3', title: 'Discutez et rencontrez', desc: 'Quand l\'intérêt est réciproque, c\'est un match ! Commencez à échanger.', emoji: '💬', img: '/photos/télécharger (15).jpg' },
+            ].map(({ step, title, desc, emoji, img }) => (
+              <div key={step} className="text-center group relative">
+                <div className="relative inline-block mb-6">
+                  <div className="h-20 w-20 rounded-3xl bg-slate-900 border border-slate-700/50 flex items-center justify-center text-3xl overflow-hidden group-hover:scale-110 transition-transform shadow-xl z-20 relative">
+                    <img src={img} alt={`Étape ${step}`} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors" />
+                    <span className="relative z-10 drop-shadow-lg">{emoji}</span>
+                  </div>
+                  <div className="absolute -inset-2 bg-gradient-to-tr from-rose-500/20 to-pink-500/20 rounded-[2rem] blur-xl -z-10 group-hover:bg-rose-500/40 transition-colors" />
+                </div>
+                <div className="text-sm font-black text-rose-400 uppercase tracking-widest mb-3">Étape {step}</div>
+                <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+                <p className="text-slate-400 text-base">{desc}</p>
               </div>
             ))}
           </div>
@@ -203,25 +253,33 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-[100px] pointer-events-none" />
+        {/* Subtle background collage */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none grid grid-cols-4 grid-rows-2 gap-4 -z-10 transform scale-110">
+          <img src="/photos/télécharger (4).jpg" className="w-full h-full object-cover rounded-3xl" alt="" />
+          <img src="/photos/télécharger (5).jpg" className="w-full h-full object-cover rounded-3xl" alt="" />
+          <img src="/photos/télécharger (6).jpg" className="w-full h-full object-cover rounded-3xl" alt="" />
+          <img src="/photos/télécharger (8).jpg" className="w-full h-full object-cover rounded-3xl" alt="" />
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
               Tout ce qu'il vous faut pour rencontrer
             </h2>
-            <p className="text-slate-400 text-lg">
+            <p className="text-slate-400 text-lg sm:text-xl px-4">
               Des outils pensés pour vous aider à trouver la bonne personne.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f) => (
-              <Card key={f.title} glass hover className={`border ${f.border}`}>
-                <CardContent className="pt-6">
-                  <div className={`h-12 w-12 rounded-2xl ${f.bg} border ${f.border} flex items-center justify-center mb-4`}>
-                    <f.icon className={`h-6 w-6 ${f.color}`} />
+              <Card key={f.title} glass hover className={`border ${f.border} bg-slate-900/50 backdrop-blur-xl`}>
+                <CardContent className="pt-8 pb-8 px-6">
+                  <div className={`h-14 w-14 rounded-2xl ${f.bg} border ${f.border} flex items-center justify-center mb-6`}>
+                    <f.icon className={`h-7 w-7 ${f.color}`} />
                   </div>
-                  <h3 className="font-bold text-white mb-2">{f.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{f.description}</p>
+                  <h3 className="text-xl font-bold text-white mb-3">{f.title}</h3>
+                  <p className="text-slate-400 text-base leading-relaxed">{f.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -229,74 +287,95 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-24 px-4 bg-slate-900/40">
-        <div className="max-w-5xl mx-auto">
+      {/* Testimonials */}
+      <section className="py-24 px-4 bg-slate-900/40 border-y border-slate-800/50 relative overflow-hidden">
+        {/* Subtle photo blur background */}
+        <div className="absolute top-0 left-0 w-full h-[300px] bg-[url('/photos/télécharger%20(15).jpg')] bg-cover bg-center opacity-5 blur-3xl pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Comment ça marche ?</h2>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Ils ont trouvé l'amour</h2>
           </div>
-          <div className="grid sm:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-3 gap-6">
             {[
-              { step: '1', title: 'Créez votre profil', desc: 'Inscrivez-vous gratuitement et remplissez votre profil en quelques minutes.', emoji: '📝' },
-              { step: '2', title: 'Découvrez des profils', desc: 'Parcourez les profils et likez ceux qui vous correspondent.', emoji: '❤️' },
-              { step: '3', title: 'Discutez et rencontrez', desc: 'Quand c\'est mutuel, c\'est un match ! Commencez à échanger.', emoji: '💬' },
-            ].map(({ step, title, desc, emoji }) => (
-              <div key={step} className="text-center">
-                <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-rose-500/20 to-pink-600/20 border border-rose-500/30 flex items-center justify-center text-2xl mx-auto mb-4">
-                  {emoji}
+              { name: "Sophie M.", age: 32, city: "Lomé", text: "J'ai rencontré mon compagnon sur Ecoute et Orientation il y a 8 mois. L'interface est tellement intuitive et les profils sont sérieux !", img: "/photos/télécharger (10).jpg" },
+              { name: "Thomas R.", age: 28, city: "Cotonou", text: "Ce que j'apprécie c'est la qualité des membres. On sent que les gens sont vraiment là pour une relation sérieuse.", img: "/photos/Handsome Man.jpg" },
+              { name: "Camille L.", age: 35, city: "Abidjan", text: "La sécurité du site m'a donné confiance dès le départ. Je recommande à toutes mes amies célibataires !", img: "/photos/télécharger (11).jpg" }
+            ].map((t, i) => (
+              <Card key={t.name} glass className="bg-slate-950/60 overflow-hidden relative group">
+                {/* Decorative image background on hover */}
+                <div className="absolute inset-x-0 top-0 h-24 opacity-20 group-hover:opacity-40 transition-opacity">
+                  <img src={t.img} alt="" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950" />
                 </div>
-                <div className="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2">Étape {step}</div>
-                <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-                <p className="text-slate-400 text-sm">{desc}</p>
-              </div>
+                <CardContent className="p-8 relative z-10 pt-12">
+                  <div className="flex text-amber-400 mb-6 relative">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-slate-300 text-lg italic leading-relaxed mb-6">"{t.text}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className="h-14 w-14 rounded-full bg-slate-800 flex items-center justify-center text-lg font-bold text-white shadow-lg shadow-rose-500/20 overflow-hidden border-2 border-slate-700">
+                      <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <p className="text-base font-bold text-white">{t.name}</p>
+                      <p className="text-sm text-slate-400">{t.age} ans · {t.city}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
       {/* Pricing */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-24 px-4 relative overflow-hidden">
+        {/* Subtle photo ambiance */}
+        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-[url('/photos/where_🔍.jpg')] bg-cover bg-center opacity-[0.02] transform -translate-y-1/2 blur-sm pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Choisissez votre offre</h2>
-            <p className="text-slate-400">Commencez gratuitement, passez Premium quand vous le souhaitez.</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Choisissez votre offre</h2>
+            <p className="text-slate-400 text-lg sm:text-xl px-4">Commencez gratuitement, passez Premium quand vous le souhaitez.</p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-8">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-2xl border p-8 ${plan.popular
-                  ? 'border-rose-500/50 bg-gradient-to-br from-rose-900/20 to-pink-900/20'
-                  : 'border-slate-800 bg-slate-900'
+                className={`relative rounded-3xl border p-10 ${plan.popular
+                  ? 'border-rose-500/50 bg-gradient-to-br from-rose-900/20 to-pink-900/20 shadow-2xl shadow-rose-500/10'
+                  : 'border-slate-800 bg-slate-900/80 backdrop-blur-sm'
                   }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white text-xs font-bold">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="px-5 py-1.5 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white text-sm font-bold shadow-lg">
                       ⭐ Recommandé
                     </span>
                   </div>
                 )}
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    {plan.popular ? <Crown className="h-5 w-5 text-amber-400" /> : <Star className="h-5 w-5 text-slate-400" />}
-                    <h3 className="text-xl font-bold text-white">{plan.name}</h3>
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    {plan.popular ? <Crown className="h-6 w-6 text-amber-400" /> : <Star className="h-6 w-6 text-slate-400" />}
+                    <h3 className="text-2xl font-black text-white">{plan.name}</h3>
                   </div>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold text-white">{plan.price}</span>
-                    <span className="text-slate-400">{plan.period}</span>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-5xl font-black text-white">{plan.price}</span>
+                    <span className="text-xl text-slate-400 font-medium">{plan.period}</span>
                   </div>
-                  <p className="text-slate-400 text-sm">{plan.description}</p>
+                  <p className="text-slate-400 text-base">{plan.description}</p>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-4 mb-10">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
-                      <span className="text-slate-300">{f}</span>
+                    <li key={f} className="flex items-center gap-3 text-base">
+                      <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0" />
+                      <span className="text-slate-200 font-medium">{f}</span>
                     </li>
                   ))}
                 </ul>
-                <Button variant={plan.variant} className="w-full" asChild>
+                <Button variant={plan.variant} className="w-full text-base sm:text-lg py-4 sm:py-6 h-auto font-bold" asChild>
                   <Link href={plan.href}>{plan.cta}</Link>
                 </Button>
               </div>
@@ -305,99 +384,81 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 px-4 bg-slate-900/40">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Ils ont trouvé l'amour</h2>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <Card key={t.name} glass>
-                <CardContent className="pt-6">
-                  <div className="flex text-amber-400 mb-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-amber-400" />
-                    ))}
-                  </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-4">"{t.text}"</p>
-                  <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-xs font-bold text-white">
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.name}</p>
-                      <p className="text-xs text-slate-400">{t.age} ans · {t.city}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+      {/* Stats */}
+      <section className="py-16 border-y border-slate-800 bg-slate-900 relative">
+        <div className="max-w-5xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+            {stats.map(({ value, label }) => (
+              <div key={label}>
+                <div className="text-4xl font-black text-white mb-2">{value}</div>
+                <div className="text-slate-400 text-base font-medium uppercase tracking-wider">{label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 mb-6">
-            <Heart className="h-8 w-8 text-rose-400 fill-rose-400" />
+      <section className="py-24 px-4 bg-slate-900/20">
+        <div className="max-w-3xl mx-auto text-center font-sans tracking-tight">
+          <div className="inline-flex p-3 rounded-2xl bg-rose-500/10 border border-rose-500/20 mb-6 group-hover:bg-rose-500/20 transition-colors cursor-pointer">
+            <Heart className="h-8 w-8 text-rose-400 fill-rose-400 animate-pulse" />
           </div>
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 sm:mb-6 leading-tight">
             Prêt(e) à trouver l'amour ?
           </h2>
-          <p className="text-slate-400 mb-8">
-            Rejoignez des milliers de célibataires sérieux. Inscription gratuite en 2 minutes.
+          <p className="text-slate-400 text-lg sm:text-xl font-medium mb-8 sm:mb-10 px-4">
+            Rejoignez des milliers de célibataires sérieux en Afrique. Inscription rapide et gratuite.
           </p>
-          <Button size="lg" asChild className="text-base px-10">
-            <Link href="/auth/register" className="gap-2">
+          <Button size="lg" asChild className="text-sm sm:text-lg w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 h-auto shadow-[0_0_30px_rgba(244,63,94,0.3)] hover:shadow-[0_0_50px_rgba(244,63,94,0.5)] transition-shadow">
+            <Link href="/auth/register" className="gap-2 font-bold uppercase tracking-wider justify-center">
               Commencer gratuitement
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </Link>
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-12 px-4">
+      <footer className="border-t border-slate-800/50 bg-slate-950 py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-4 gap-8 mb-8">
+          <div className="grid sm:grid-cols-4 gap-12 mb-12">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
-                  <Heart className="h-4 w-4 text-white fill-white" />
+              <div className="flex items-center gap-2 sm:gap-3 mb-6">
+                <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                  <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white fill-white" />
                 </div>
-                <span className="font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
+                <span className="text-lg sm:text-xl font-black text-white tracking-tight">Ecoute et <span className="text-rose-500">Orientation</span></span>
               </div>
-              <p className="text-slate-400 text-sm">Rencontres sérieuses pour adultes en France.</p>
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed">Le site de rencontres conçu pour les célibataires sérieux au Togo et en Afrique.</p>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-3">Plateforme</h4>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li><Link href="/auth/register" className="hover:text-white transition-colors">S'inscrire</Link></li>
-                <li><Link href="/auth/login" className="hover:text-white transition-colors">Se connecter</Link></li>
-                <li><Link href="/premium" className="hover:text-white transition-colors">Premium</Link></li>
+              <h4 className="font-bold text-white text-lg mb-5 uppercase tracking-wide">Plateforme</h4>
+              <ul className="space-y-3 text-base text-slate-400">
+                <li><Link href="/auth/register" className="hover:text-rose-400 transition-colors">S'inscrire</Link></li>
+                <li><Link href="/auth/login" className="hover:text-rose-400 transition-colors">Se connecter</Link></li>
+                <li><Link href="/premium" className="hover:text-rose-400 transition-colors">Premium</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-3">Légal</h4>
-              <ul className="space-y-2 text-sm text-slate-400">
-                <li><Link href="/legal/privacy" className="hover:text-white transition-colors">Confidentialité</Link></li>
-                <li><Link href="/legal/terms" className="hover:text-white transition-colors">CGU</Link></li>
-                <li><Link href="/legal/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
+              <h4 className="font-bold text-white text-lg mb-5 uppercase tracking-wide">Légal</h4>
+              <ul className="space-y-3 text-base text-slate-400">
+                <li><Link href="/legal/privacy" className="hover:text-rose-400 transition-colors">Confidentialité</Link></li>
+                <li><Link href="/legal/terms" className="hover:text-rose-400 transition-colors">CGU</Link></li>
+                <li><Link href="/legal/cookies" className="hover:text-rose-400 transition-colors">Cookies</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-3">Sécurité</h4>
-              <div className="flex items-start gap-2 text-sm text-slate-400">
-                <Lock className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <span>Données chiffrées et protégées selon le RGPD</span>
+              <h4 className="font-bold text-white text-lg mb-5 uppercase tracking-wide">Sécurité</h4>
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-300">
+                <Lock className="h-5 w-5 text-emerald-400 flex-shrink-0" />
+                <span>Données chiffrées et protégées selon le RGPD. Confidentialité garantie.</span>
               </div>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-slate-500 text-sm">© 2024 Ecoute et Orientation. Tous droits réservés.</p>
-            <p className="text-slate-500 text-sm flex items-center gap-1">
+          <div className="border-t border-slate-800/50 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-slate-500 text-sm">© {new Date().getFullYear()} Ecoute et Orientation. Tous droits réservés.</p>
+            <p className="text-slate-500 text-sm flex items-center gap-2 font-medium">
               Réservé aux adultes de 18 ans et plus
               <Shield className="h-4 w-4 text-slate-600" />
             </p>
