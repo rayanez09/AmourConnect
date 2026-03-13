@@ -72,23 +72,28 @@ export default function MatchesPage() {
             // Enrich each match (other profile + last message)
             const enriched: EnrichedMatch[] = await Promise.all(
                 (rawMatches ?? []).map(async (match) => {
-                    const otherId = match.user1_id === me.id ? match.user2_id : match.user1_id
+                    try {
+                        const otherId = match.user1_id === me.id ? match.user2_id : match.user1_id
 
-                    const { data: otherProfile } = await supabase
-                        .from('profiles')
-                        .select('id, full_name, avatar_url, city, is_premium, age')
-                        .eq('id', otherId)
-                        .single()
+                        const { data: otherProfile } = await supabase
+                            .from('profiles')
+                            .select('id, full_name, avatar_url, city, is_premium, age')
+                            .eq('id', otherId)
+                            .maybeSingle()
 
-                    const { data: lastMsg } = await supabase
-                        .from('messages')
-                        .select('content, created_at')
-                        .eq('match_id', match.id)
-                        .order('created_at', { ascending: false })
-                        .limit(1)
-                        .single()
+                        const { data: lastMsg } = await supabase
+                            .from('messages')
+                            .select('content, created_at')
+                            .eq('match_id', match.id)
+                            .order('created_at', { ascending: false })
+                            .limit(1)
+                            .maybeSingle()
 
-                    return { id: match.id, otherProfile, lastMsg: lastMsg ?? null }
+                        return { id: match.id, otherProfile, lastMsg: lastMsg ?? null }
+                    } catch (e) {
+                        console.error('Error enriching match:', e)
+                        return { id: match.id, otherProfile: null, lastMsg: null }
+                    }
                 })
             )
             setMatches(enriched)
@@ -103,12 +108,16 @@ export default function MatchesPage() {
 
             const likers: LikerProfile[] = await Promise.all(
                 (whoLikedMe ?? []).map(async (like) => {
-                    const { data: liker } = await supabase
-                        .from('profiles')
-                        .select('id, full_name, avatar_url, age, city, is_premium')
-                        .eq('id', like.sender_id)
-                        .single()
-                    return liker
+                    try {
+                        const { data: liker } = await supabase
+                            .from('profiles')
+                            .select('id, full_name, avatar_url, age, city, is_premium')
+                            .eq('id', like.sender_id)
+                            .maybeSingle()
+                        return liker
+                    } catch (e) {
+                        return null
+                    }
                 })
             )
             setLikerProfiles(likers.filter(Boolean))
@@ -127,7 +136,7 @@ export default function MatchesPage() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto px-4 py-8 space-y-8 animate-in fade-in duration-500">
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-white flex items-center gap-2">
                     <Heart className="h-6 w-6 text-rose-500 fill-rose-500" />
@@ -214,7 +223,7 @@ export default function MatchesPage() {
 
                 {matches.length === 0 ? (
                     <EmptyState
-                        emoji="💕"
+                        icon={Heart}
                         title="Pas encore de match"
                         description="Explorez des profils et likez ceux qui vous plaisent. Quand c'est mutuel, c'est un match !"
                         action={

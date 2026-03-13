@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Heart, Upload, MapPin, User, FileText, Eye } from 'lucide-react'
+import { Heart, Upload, MapPin, User, FileText, Eye, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import { profileSchema, type ProfileInput } from '@/lib/validations'
@@ -137,10 +137,22 @@ export default function ProfileSetupPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-            <div className="w-full max-w-lg">
+        <div className="min-h-screen bg-slate-900 overflow-y-auto py-12 px-4 flex justify-center">
+            <div className="w-full max-w-lg space-y-8">
+                {/* Back button (only if not on step 1) */}
+                <div className="h-6">
+                    {step > 1 && (
+                        <button
+                            onClick={() => setStep(s => s - 1)}
+                            className="text-slate-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"
+                        >
+                            <ArrowLeft className="h-4 w-4" />
+                            Retour
+                        </button>
+                    )}
+                </div>
                 {/* Logo */}
-                <div className="text-center mb-8">
+                <div className="text-center">
                     <div className="inline-flex items-center gap-3">
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
                             <Heart className="h-6 w-6 text-white fill-white" />
@@ -276,20 +288,25 @@ export default function ProfileSetupPage() {
                                 <h2 className="text-xl font-bold text-white">Votre photo de profil</h2>
                                 <p className="text-slate-400 text-sm">Une photo augmente vos chances de 85%. Elle sera compressée automatiquement.</p>
                                 <div className="flex flex-col items-center gap-4">
-                                    <div className="relative h-32 w-32 rounded-full overflow-hidden ring-4 ring-rose-500/30 bg-slate-800">
+                                    <div className="relative h-40 w-40 rounded-3xl overflow-hidden ring-4 ring-rose-500/30 bg-slate-800 group shadow-2xl">
                                         <Image
                                             src={avatarPreview || getAvatarFallbackUrl(getValues('full_name'))}
                                             alt="Aperçu"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                                         />
+                                        {!avatarPreview && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm">
+                                                <Upload className="h-8 w-8 text-slate-400 animate-pulse" />
+                                            </div>
+                                        )}
                                     </div>
                                     <label
                                         htmlFor="avatar-upload"
-                                        className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 border-dashed border-slate-600 hover:border-rose-500 text-slate-400 hover:text-rose-400 transition-all text-sm font-medium"
+                                        className="cursor-pointer flex items-center gap-3 px-6 py-3 rounded-2xl bg-slate-800 border border-slate-700 hover:border-rose-500 text-white hover:text-rose-400 transition-all text-sm font-semibold shadow-lg active:scale-95"
                                     >
-                                        <Upload className="h-4 w-4" />
-                                        Choisir une photo
+                                        <Upload className="h-5 w-5" />
+                                        {avatarPreview ? 'Changer de photo' : 'Choisir une photo'}
                                     </label>
                                     <input
                                         id="avatar-upload"
@@ -298,6 +315,12 @@ export default function ProfileSetupPage() {
                                         className="hidden"
                                         onChange={handleAvatarChange}
                                     />
+                                    {avatarPreview && (
+                                        <div className="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-xl flex items-center gap-2 text-emerald-400 text-xs font-medium animate-in zoom-in-95 duration-300">
+                                            <div className="h-2 w-2 rounded-full bg-emerald-500" />
+                                            Photo sélectionnée ! Elle a fière allure.
+                                        </div>
+                                    )}
                                     <p className="text-xs text-slate-500">PNG, JPG, WEBP · Max 10MB</p>
                                 </div>
                             </>

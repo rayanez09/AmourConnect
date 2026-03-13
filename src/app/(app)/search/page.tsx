@@ -106,9 +106,9 @@ export default function SearchPage() {
     const hasActiveFilters = genderFilter || minAge || maxAge || cityInput
 
     return (
-        <div className="max-w-6xl mx-auto px-4 py-8">
+        <main className="max-w-6xl mx-auto px-4 py-8 space-y-8 animate-in fade-in duration-500">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-white">Découvrir</h1>
                     <p className="text-slate-400 text-sm mt-0.5">
@@ -252,6 +252,6 @@ export default function SearchPage() {
                     )}
                 </>
             )}
-        </div>
+        </main>
     )
 }

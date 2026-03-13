@@ -45,9 +45,8 @@ function LoginForm() {
             return
         }
 
-        success('Connexion réussie', 'Bienvenue !')
         router.push(redirectTo)
-        router.refresh()
+        success('Connexion réussie', 'Bienvenue !')
     }
 
     return (

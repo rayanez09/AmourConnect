@@ -52,9 +52,9 @@ export default function PremiumPage() {
             {/* Pricing cards */}
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
                 {[
-                    { period: '1 mois', price: '19,90€', pricePerMonth: '19,90€/mois', badge: null },
-                    { period: '3 mois', price: '44,99€', pricePerMonth: '15€/mois', badge: '🔥 Populaire', save: 'Économisez 25%' },
-                    { period: '6 mois', price: '71,99€', pricePerMonth: '12€/mois', badge: '💎 Meilleur prix', save: 'Économisez 40%' },
+                    { period: '1 mois', price: '$35', pricePerMonth: '$35/mois', badge: null },
+                    { period: '3 mois', price: '$85', pricePerMonth: '$28/mois', badge: 'Populaire', icon: Zap, save: 'Économisez 20%' },
+                    { period: '6 mois', price: '$150', pricePerMonth: '$25/mois', badge: 'Meilleur prix', icon: Star, save: 'Économisez 30%' },
                 ].map((plan) => (
                     <div
                         key={plan.period}
@@ -65,7 +65,8 @@ export default function PremiumPage() {
                     >
                         {plan.badge && (
                             <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                                <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-xs font-bold">
+                                <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-xs font-bold flex items-center gap-1.5">
+                                    {plan.icon && <plan.icon className="h-3 w-3" />}
                                     {plan.badge}
                                 </span>
                             </div>

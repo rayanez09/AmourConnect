@@ -10,6 +10,7 @@ import {
   Crown,
   Zap,
   Lock,
+  FileText,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent } from '@/components/ui/Card'
@@ -74,7 +75,7 @@ const plans = [
   },
   {
     name: 'Premium',
-    price: '19,90€',
+    price: '$35',
     period: '/mois',
     description: 'Pour maximiser vos chances',
     features: [
@@ -250,16 +251,18 @@ export default function HomePage() {
             <div className="hidden sm:block absolute top-[40px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-rose-500/30 to-transparent -z-10" />
 
             {[
-              { step: '1', title: 'Créez votre profil', desc: 'Inscrivez-vous gratuitement et remplissez votre profil en quelques minutes.', emoji: '📝', img: '/photos/télécharger (9).jpg' },
-              { step: '2', title: 'Découvrez des profils', desc: 'Parcourez les profils près de vous et likez ceux qui vous correspondent.', emoji: '❤️', img: '/photos/télécharger (13).jpg' },
-              { step: '3', title: 'Discutez et rencontrez', desc: 'Quand l\'intérêt est réciproque, c\'est un match ! Commencez à échanger.', emoji: '💬', img: '/photos/télécharger (15).jpg' },
-            ].map(({ step, title, desc, emoji, img }) => (
+              { step: '1', title: 'Créez votre profil', desc: 'Inscrivez-vous gratuitement et remplissez votre profil en quelques minutes.', icon: FileText, img: '/photos/télécharger (9).jpg' },
+              { step: '2', title: 'Découvrez des profils', desc: 'Parcourez les profils près de vous et likez ceux qui vous correspondent.', icon: Heart, img: '/photos/télécharger (13).jpg' },
+              { step: '3', title: 'Discutez et rencontrez', desc: 'Quand l\'intérêt est réciproque, c\'est un match ! Commencez à échanger.', icon: MessageCircle, img: '/photos/télécharger (15).jpg' },
+            ].map(({ step, title, desc, icon: Icon, img }) => (
               <div key={step} className="text-center group relative">
                 <div className="relative inline-block mb-6">
                   <div className="h-20 w-20 rounded-3xl bg-slate-900 border border-slate-700/50 flex items-center justify-center text-3xl overflow-hidden group-hover:scale-110 transition-transform shadow-xl z-20 relative">
                     <img src={img} alt={`Étape ${step}`} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors" />
-                    <span className="relative z-10 drop-shadow-lg">{emoji}</span>
+                    <div className="relative z-10 p-4 rounded-2xl bg-slate-900/50 backdrop-blur-sm border border-white/10">
+                      <Icon className="h-8 w-8 text-rose-500" />
+                    </div>
                   </div>
                   <div className="absolute -inset-2 bg-gradient-to-tr from-rose-500/20 to-pink-500/20 rounded-[2rem] blur-xl -z-10 group-hover:bg-rose-500/40 transition-colors" />
                 </div>

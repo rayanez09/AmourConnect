@@ -47,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="dark">
-      <body className={`${outfit.variable} font-sans antialiased bg-slate-950 text-white`}>
+      <body className={`${outfit.variable} font-sans antialiased bg-slate-900 text-white`}>
         <ToastProvider>
           {children}
         </ToastProvider>
