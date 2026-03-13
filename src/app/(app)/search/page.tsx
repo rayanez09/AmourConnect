@@ -48,25 +48,31 @@ export default function SearchPage() {
             if (!currentProfile) return
             setIsLoading(true)
 
-            const activeFilters: SearchFilters = {
-                ...(genderFilter && { gender: genderFilter as any }),
-                ...(minAge && { min_age: parseInt(minAge) }),
-                ...(maxAge && { max_age: parseInt(maxAge) }),
-                ...(debouncedCity && { city: debouncedCity }),
+            try {
+                const activeFilters: SearchFilters = {
+                    ...(genderFilter && { gender: genderFilter as any }),
+                    ...(minAge && { min_age: parseInt(minAge) }),
+                    ...(maxAge && { max_age: parseInt(maxAge) }),
+                    ...(debouncedCity && { city: debouncedCity }),
+                }
+
+                const result = await searchProfiles(currentProfile.user_id, activeFilters, pageNum)
+
+                if (reset || pageNum === 1) {
+                    setProfiles(result.data)
+                } else {
+                    setProfiles((prev) => [...prev, ...result.data])
+                }
+
+                setTotal(result.count)
+                setHasMore(pageNum < result.total_pages)
+                setPage(pageNum)
+            } catch (err) {
+                console.error('Search error:', err)
+                error('Erreur', 'Impossible de charger les résultats')
+            } finally {
+                setIsLoading(false)
             }
-
-            const result = await searchProfiles(currentProfile.user_id, activeFilters, pageNum)
-
-            if (reset || pageNum === 1) {
-                setProfiles(result.data)
-            } else {
-                setProfiles((prev) => [...prev, ...result.data])
-            }
-
-            setTotal(result.count)
-            setHasMore(pageNum < result.total_pages)
-            setPage(pageNum)
-            setIsLoading(false)
         },
         [currentProfile, genderFilter, minAge, maxAge, debouncedCity]
     )

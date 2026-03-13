@@ -49,79 +49,87 @@ export default function MatchesPage() {
         if (!profile) return
 
         async function load() {
-            setIsLoading(true)
-            const supabase = createClient()
+            try {
+                setIsLoading(true)
+                const supabase = createClient()
 
-            // Confirm premium status
-            const { data: me } = await supabase
-                .from('profiles')
-                .select('id, is_premium')
-                .eq('user_id', profile.user_id)
-                .single()
+                // Confirm premium status
+                const { data: me } = await supabase
+                    .from('profiles')
+                    .select('id, is_premium')
+                    .eq('user_id', profile.user_id)
+                    .single()
 
-            if (!me) { router.push('/profile/setup'); return }
-            setIsPremium(me.is_premium)
+                if (!me) {
+                    router.push('/profile/setup')
+                    return
+                }
+                setIsPremium(me.is_premium)
 
-            // Fetch matches
-            const { data: rawMatches } = await supabase
-                .from('matches')
-                .select('*')
-                .or(`user1_id.eq.${me.id},user2_id.eq.${me.id}`)
-                .order('created_at', { ascending: false })
+                // Fetch matches
+                const { data: rawMatches } = await supabase
+                    .from('matches')
+                    .select('*')
+                    .or(`user1_id.eq.${me.id},user2_id.eq.${me.id}`)
+                    .order('created_at', { ascending: false })
 
-            // Enrich each match (other profile + last message)
-            const enriched: EnrichedMatch[] = await Promise.all(
-                (rawMatches ?? []).map(async (match) => {
-                    try {
-                        const otherId = match.user1_id === me.id ? match.user2_id : match.user1_id
+                // Enrich each match (other profile + last message)
+                const enriched: EnrichedMatch[] = await Promise.all(
+                    (rawMatches ?? []).map(async (match) => {
+                        try {
+                            const otherId = match.user1_id === me.id ? match.user2_id : match.user1_id
 
-                        const { data: otherProfile } = await supabase
-                            .from('profiles')
-                            .select('id, full_name, avatar_url, city, is_premium, age')
-                            .eq('id', otherId)
-                            .maybeSingle()
+                            const { data: otherProfile } = await supabase
+                                .from('profiles')
+                                .select('id, full_name, avatar_url, city, is_premium, age')
+                                .eq('id', otherId)
+                                .maybeSingle()
 
-                        const { data: lastMsg } = await supabase
-                            .from('messages')
-                            .select('content, created_at')
-                            .eq('match_id', match.id)
-                            .order('created_at', { ascending: false })
-                            .limit(1)
-                            .maybeSingle()
+                            const { data: lastMsg } = await supabase
+                                .from('messages')
+                                .select('content, created_at')
+                                .eq('match_id', match.id)
+                                .order('created_at', { ascending: false })
+                                .limit(1)
+                                .maybeSingle()
 
-                        return { id: match.id, otherProfile, lastMsg: lastMsg ?? null }
-                    } catch (e) {
-                        console.error('Error enriching match:', e)
-                        return { id: match.id, otherProfile: null, lastMsg: null }
-                    }
-                })
-            )
-            setMatches(enriched)
+                            return { id: match.id, otherProfile, lastMsg: lastMsg ?? null }
+                        } catch (e) {
+                            console.error('Error enriching match:', e)
+                            return { id: match.id, otherProfile: null, lastMsg: null }
+                        }
+                    })
+                )
+                setMatches(enriched.filter(m => m.otherProfile))
 
-            // Who liked me (premium)
-            const { data: whoLikedMe } = await supabase
-                .from('likes')
-                .select('sender_id, created_at')
-                .eq('receiver_id', me.id)
-                .order('created_at', { ascending: false })
-                .limit(6)
+                // Who liked me (premium)
+                const { data: whoLikedMe } = await supabase
+                    .from('likes')
+                    .select('sender_id, created_at')
+                    .eq('receiver_id', me.id)
+                    .order('created_at', { ascending: false })
+                    .limit(6)
 
-            const likers: LikerProfile[] = await Promise.all(
-                (whoLikedMe ?? []).map(async (like) => {
-                    try {
-                        const { data: liker } = await supabase
-                            .from('profiles')
-                            .select('id, full_name, avatar_url, age, city, is_premium')
-                            .eq('id', like.sender_id)
-                            .maybeSingle()
-                        return liker
-                    } catch (e) {
-                        return null
-                    }
-                })
-            )
-            setLikerProfiles(likers.filter(Boolean))
-            setIsLoading(false)
+                const likers: LikerProfile[] = await Promise.all(
+                    (whoLikedMe ?? []).map(async (like) => {
+                        try {
+                            const { data: liker } = await supabase
+                                .from('profiles')
+                                .select('id, full_name, avatar_url, age, city, is_premium')
+                                .eq('id', like.sender_id)
+                                .maybeSingle()
+                            return liker
+                        } catch (e) {
+                            return null
+                        }
+                    })
+                )
+                setLikerProfiles(likers.filter(Boolean))
+            } catch (err) {
+                console.error('Matches fetch error:', err)
+            } finally {
+                setIsLoading(false)
+            }
         }
 
         load()
