@@ -84,8 +84,9 @@ export async function searchProfiles(
 
     // 3. Exclude liked profiles
     if (likedProfileIds.length > 0) {
-        query = query.not('id', 'in', `(${likedProfileIds.join(',')})`)
+        query = query.filter('id', 'not.in', `(${likedProfileIds.join(',')})`)
     }
+
 
     if (filters.gender) {
         query = query.eq('gender', filters.gender)
