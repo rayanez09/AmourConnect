@@ -138,7 +138,7 @@ export default function MatchesPage() {
         }
 
         load()
-    }, [profile, router])
+    }, [profile, authLoading, router])
 
     if (isLoading || authLoading) {
         return (
