@@ -4,9 +4,28 @@ import Link from 'next/link'
 import { MessageCircle, Heart, Search } from 'lucide-react'
 import { Avatar } from '@/components/ui/Avatar'
 import { Card, CardContent } from '@/components/ui/Card'
-import { getAvatarFallbackUrl } from '@/lib/utils'
 import { formatDistanceToNow } from 'date-fns'
 import { fr } from 'date-fns/locale'
+
+interface MatchRecord {
+    id: string
+    user1_id: string
+    user2_id: string
+    created_at: string
+}
+
+interface ProfileRecord {
+    id: string
+    full_name: string | null
+    avatar_url: string | null
+    is_premium: boolean
+}
+
+interface MessageRecord {
+    content: string
+    created_at: string
+    sender_id: string
+}
 
 export default async function MessagesPage() {
     const supabase = await createClient()
@@ -22,33 +41,38 @@ export default async function MessagesPage() {
 
     if (!profile) redirect('/profile/setup')
 
+    const myProfileId = (profile as { id: string }).id
+
     // Fetch matches with other profile info and last message
     // Note: This is an async component, we fetch server-side
     const { data: rawMatches } = await supabase
         .from('matches')
-        .select(`
-            id,
-            user1_id,
-            user2_id,
-            created_at
-        `)
-        .or(`user1_id.eq.${profile.id},user2_id.eq.${profile.id}`)
+        .select('id, user1_id, user2_id, created_at')
+        .or(`user1_id.eq.${myProfileId},user2_id.eq.${myProfileId}`)
         .order('created_at', { ascending: false })
 
     // Enrich matches
     const matches = await Promise.all(
-        (rawMatches ?? []).map(async (m) => {
-            const otherId = m.user1_id === profile.id ? m.user2_id : m.user1_id
+        ((rawMatches as MatchRecord[]) ?? []).map(async (m) => {
+            const otherId = m.user1_id === myProfileId ? m.user2_id : m.user1_id
 
             const [otherRes, msgRes] = await Promise.all([
-                supabase.from('profiles').select('id, full_name, avatar_url, is_premium').eq('id', otherId).single(),
-                supabase.from('messages').select('content, created_at, sender_id').eq('match_id', m.id).order('created_at', { ascending: false }).limit(1).maybeSingle()
+                supabase.from('profiles')
+                    .select('id, full_name, avatar_url, is_premium')
+                    .eq('id', otherId)
+                    .single(),
+                supabase.from('messages')
+                    .select('content, created_at, sender_id')
+                    .eq('match_id', m.id)
+                    .order('created_at', { ascending: false })
+                    .limit(1)
+                    .maybeSingle()
             ])
 
             return {
                 matchId: m.id,
-                profile: otherRes.data,
-                lastMessage: msgRes.data
+                profile: otherRes.data as ProfileRecord | null,
+                lastMessage: msgRes.data as MessageRecord | null
             }
         })
     )
@@ -99,23 +123,23 @@ export default async function MessagesPage() {
                                     <CardContent className="p-4 flex items-center gap-4">
                                         <Avatar
                                             src={m.profile?.avatar_url}
-                                            name={m.profile?.full_name}
+                                            name={m.profile?.full_name ?? 'Utilisateur'}
                                             premium={m.profile?.is_premium}
                                         />
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between mb-0.5">
                                                 <h3 className="font-bold text-white truncate group-hover:text-rose-400 transition-colors">
-                                                    {m.profile?.full_name}
+                                                    {m.profile?.full_name ?? 'Utilisateur'}
                                                 </h3>
                                                 {m.lastMessage && (
                                                     <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
-                                                        {formatDistanceToNow(new Error(m.lastMessage.created_at), { addSuffix: true, locale: fr })}
+                                                        {formatDistanceToNow(new Date(m.lastMessage.created_at), { addSuffix: true, locale: fr })}
                                                     </span>
                                                 )}
                                             </div>
                                             <p className="text-sm text-slate-400 truncate">
                                                 {m.lastMessage
-                                                    ? (m.lastMessage.sender_id === profile.id ? 'Vous: ' : '') + m.lastMessage.content
+                                                    ? (m.lastMessage.sender_id === myProfileId ? 'Vous: ' : '') + m.lastMessage.content
                                                     : 'Dites bonjour ! 👋'}
                                             </p>
                                         </div>
