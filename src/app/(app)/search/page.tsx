@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { Search, SlidersHorizontal, X, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -23,8 +24,9 @@ const GENDER_OPTIONS = [
 ]
 
 export default function SearchPage() {
-    const { profile: currentProfile } = useAuthStore()
+    const { profile: currentProfile, isLoading: authLoading } = useAuthStore()
     const { success, error, info } = useToast()
+    const router = useRouter()
 
     const [profiles, setProfiles] = useState<Profile[]>([])
     const [isLoading, setIsLoading] = useState(true)
@@ -78,8 +80,15 @@ export default function SearchPage() {
     )
 
     useEffect(() => {
+        if (authLoading) return
+
+        if (!currentProfile) {
+            router.push('/profile/setup')
+            return
+        }
+
         doSearch(1, true)
-    }, [doSearch])
+    }, [currentProfile, authLoading, doSearch, router])
 
     const handleLike = async (profileId: string) => {
         if (!currentProfile) return
@@ -118,7 +127,7 @@ export default function SearchPage() {
                 <div>
                     <h1 className="text-2xl font-bold text-white">Découvrir</h1>
                     <p className="text-slate-400 text-sm mt-0.5">
-                        {isLoading ? 'Recherche...' : `${total} profil${total !== 1 ? 's' : ''} trouvé${total !== 1 ? 's' : ''}`}
+                        {isLoading || authLoading ? 'Recherche...' : `${total} profil${total !== 1 ? 's' : ''} trouvé${total !== 1 ? 's' : ''}`}
                     </p>
                 </div>
                 <div className="flex gap-2">
@@ -212,7 +221,7 @@ export default function SearchPage() {
             )}
 
             {/* Results */}
-            {isLoading && profiles.length === 0 ? (
+            {(isLoading || authLoading) && profiles.length === 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {Array.from({ length: 8 }).map((_, i) => (
                         <ProfileCardSkeleton key={i} />

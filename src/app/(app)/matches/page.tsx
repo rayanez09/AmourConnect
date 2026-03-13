@@ -36,7 +36,7 @@ interface LikerProfile {
 }
 
 export default function MatchesPage() {
-    const { profile } = useAuthStore()
+    const { profile, isLoading: authLoading } = useAuthStore()
     const unreadPerMatch = useNotificationStore((s) => s.unreadPerMatch)
     const router = useRouter()
 
@@ -46,7 +46,12 @@ export default function MatchesPage() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (!profile) return
+        if (authLoading) return
+
+        if (!profile) {
+            router.push('/profile/setup')
+            return
+        }
 
         async function load() {
             try {
@@ -135,7 +140,7 @@ export default function MatchesPage() {
         load()
     }, [profile, router])
 
-    if (isLoading) {
+    if (isLoading || authLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="h-10 w-10 rounded-full border-2 border-slate-700 border-t-rose-500 animate-spin" />
