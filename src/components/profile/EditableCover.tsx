@@ -74,7 +74,7 @@ export function EditableCover({ profile, currentUserId, authUserId }: EditableCo
     }
 
     return (
-        <div className="relative h-64 sm:h-80 rounded-3xl overflow-hidden bg-slate-800 border border-slate-700 group">
+        <div className="relative h-64 sm:h-80 rounded-3xl overflow-hidden bg-slate-100 border border-slate-100 group shadow-sm">
             {/* Background Image */}
             {previewUrl ? (
                 <Image
@@ -90,7 +90,7 @@ export function EditableCover({ profile, currentUserId, authUserId }: EditableCo
                 </div>
             )}
 
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            {/* Removed gradient overlay as per user request */}
 
             {/* Editable overlay when hovering on own profile */}
             {isCurrentUser && (
@@ -119,7 +119,7 @@ export function EditableCover({ profile, currentUserId, authUserId }: EditableCo
             {/* Footer informations */}
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between pointer-events-none">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                    <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {profile.full_name}
                         {profile.is_premium && (
                             <span className="bg-amber-500/20 text-amber-400 text-xs px-2.5 py-1 rounded-full border border-amber-500/20 font-medium">
@@ -127,7 +127,7 @@ export function EditableCover({ profile, currentUserId, authUserId }: EditableCo
                             </span>
                         )}
                     </h1>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-300">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-white/90">
                         {profile.age && (
                             <span className="flex items-center gap-1.5">
                                 <User className="h-4 w-4" />

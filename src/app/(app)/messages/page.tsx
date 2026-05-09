@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { MessageCircle, Heart, Search } from 'lucide-react'
 import { Avatar } from '@/components/ui/Avatar'
 import { Card, CardContent } from '@/components/ui/Card'
@@ -84,11 +83,11 @@ export default async function MessagesPage() {
         <main className="max-w-3xl mx-auto px-4 py-8 space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                    <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
                         <MessageCircle className="h-6 w-6 text-rose-500" />
                         Messages
                     </h1>
-                    <p className="text-slate-400 text-sm mt-0.5">
+                    <p className="text-slate-500 text-sm mt-0.5">
                         Vos conversations avec vos matchs
                     </p>
                 </div>
@@ -96,30 +95,28 @@ export default async function MessagesPage() {
 
             <div className="space-y-3">
                 {validMatches.length === 0 ? (
-                    <Card className="p-12 text-center bg-slate-900 border-slate-800">
+                    <Card className="p-12 text-center bg-white border-slate-100 shadow-sm">
                         <CardContent className="p-0 flex flex-col items-center gap-4">
-                            <div className="h-20 w-20 rounded-3xl bg-slate-800 flex items-center justify-center">
-                                <Heart className="h-10 w-10 text-slate-600" />
+                            <div className="h-20 w-20 rounded-3xl bg-slate-50 border border-slate-100 flex items-center justify-center">
+                                <Heart className="h-10 w-10 text-slate-300" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-bold text-white">Pas encore de messages</h3>
-                                <p className="text-slate-400 mt-1 max-w-sm">
+                                <h3 className="text-lg font-bold text-slate-900">Pas encore de messages</h3>
+                                <p className="text-slate-500 mt-1 max-w-sm">
                                     Commencez à liker des profils ! Dès que vous matchez, vous pourrez discuter ici.
                                 </p>
                             </div>
-                            <Link href="/search">
-                                <button className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold hover:shadow-lg hover:shadow-rose-500/20 active:scale-95 transition-all flex items-center gap-2">
-                                    <Search className="h-4 w-4" />
-                                    Découvrir des profils
-                                </button>
-                            </Link>
+                            <a href="/search" className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold hover:shadow-lg hover:shadow-rose-500/20 active:scale-95 transition-all flex items-center gap-2">
+                                <Search className="h-4 w-4" />
+                                Découvrir des profils
+                            </a>
                         </CardContent>
                     </Card>
                 ) : (
                     <div className="grid grid-cols-1 gap-3">
                         {validMatches.map((m) => (
-                            <Link key={m.matchId} href={`/messages/${m.matchId}`}>
-                                <Card className="hover:bg-slate-800 transition-colors cursor-pointer border-slate-800 bg-slate-900/50 backdrop-blur-sm overflow-hidden group">
+                            <a key={m.matchId} href={`/messages/${m.matchId}`}>
+                                <Card className="hover:bg-slate-50 hover:border-rose-100 transition-all cursor-pointer border-slate-100 bg-white shadow-sm overflow-hidden group">
                                     <CardContent className="p-4 flex items-center gap-4">
                                         <Avatar
                                             src={m.profile?.avatar_url}
@@ -128,7 +125,7 @@ export default async function MessagesPage() {
                                         />
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between mb-0.5">
-                                                <h3 className="font-bold text-white truncate group-hover:text-rose-400 transition-colors">
+                                                <h3 className="font-bold text-slate-900 truncate group-hover:text-rose-600 transition-colors">
                                                     {m.profile?.full_name ?? 'Utilisateur'}
                                                 </h3>
                                                 {m.lastMessage && (
@@ -137,7 +134,7 @@ export default async function MessagesPage() {
                                                     </span>
                                                 )}
                                             </div>
-                                            <p className="text-sm text-slate-400 truncate">
+                                            <p className="text-sm text-slate-500 truncate">
                                                 {m.lastMessage
                                                     ? (m.lastMessage.sender_id === myProfileId ? 'Vous: ' : '') + m.lastMessage.content
                                                     : 'Dites bonjour ! 👋'}
@@ -145,7 +142,7 @@ export default async function MessagesPage() {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            </Link>
+                            </a>
                         ))}
                     </div>
                 )}

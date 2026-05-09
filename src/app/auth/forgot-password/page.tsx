@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Mail, Heart, ArrowLeft, CheckCircle } from 'lucide-react'
@@ -51,12 +50,12 @@ export default function ForgotPasswordPage() {
                         Si un compte existe avec l'adresse <strong className="text-white">{getValues('email')}</strong>,
                         vous recevrez un email avec un lien pour réinitialiser votre mot de passe.
                     </p>
-                    <Link href="/auth/login">
+                    <a href="/auth/login">
                         <Button variant="outline" className="w-full gap-2">
                             <ArrowLeft className="h-4 w-4" />
                             Retour à la connexion
                         </Button>
-                    </Link>
+                    </a>
                 </div>
             </div>
         )
@@ -66,11 +65,11 @@ export default function ForgotPasswordPage() {
         <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
-                    <Link href="/" className="inline-flex items-center gap-3 mb-6">
+                    <a href="/" className="inline-flex items-center gap-3 mb-6">
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
                             <Heart className="h-6 w-6 text-white fill-white" />
                         </div>
-                    </Link>
+                    </a>
                     <h1 className="text-3xl font-bold text-white">Mot de passe oublié</h1>
                     <p className="text-slate-400 mt-2">
                         Entrez votre email pour recevoir un lien de réinitialisation.
@@ -99,13 +98,13 @@ export default function ForgotPasswordPage() {
                     </Button>
                 </div>
 
-                <Link
+                <a
                     href="/auth/login"
                     className="flex items-center justify-center gap-2 text-slate-400 hover:text-white transition-colors"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     Retour à la connexion
-                </Link>
+                </a>
             </div>
         </div>
     )

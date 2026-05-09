@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
 import './globals.css'
 import { ToastProvider } from '@/components/ui/Toast'
+import { ThemeProvider } from '@/components/providers/ThemeProvider'
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -11,14 +12,14 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
-    template: '%s | Ecoute et Orientation',
+    default: 'AmourConnect – Rencontres sérieuses en ligne',
+    template: '%s | AmourConnect',
   },
   description:
-    "Rejoignez Ecoute et Orientation, la plateforme de rencontres sérieuses pour adultes. Créez votre profil, rencontrez des personnes compatibles et échangez en toute sécurité.",
+    "Rejoignez AmourConnect, la plateforme de rencontres sérieuses pour adultes. Créez votre profil, rencontrez des personnes compatibles et échangez en toute sécurité.",
   keywords: ['rencontre', 'site de rencontre', 'célibataire', 'amour', 'relation sérieuse'],
-  authors: [{ name: 'Ecoute et Orientation' }],
-  creator: 'Ecoute et Orientation',
+  authors: [{ name: 'AmourConnect' }],
+  creator: 'AmourConnect',
   robots: {
     index: true,
     follow: true,
@@ -26,14 +27,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    title: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
-    description: 'Trouvez votre âme sœur sur Ecoute et Orientation.',
-    siteName: 'Ecoute et Orientation',
+    title: 'AmourConnect – Rencontres sérieuses en ligne',
+    description: 'Trouvez votre âme sœur sur AmourConnect.',
+    siteName: 'AmourConnect',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ecoute et Orientation – Rencontres sérieuses en ligne',
-    description: 'Trouvez votre âme sœur sur Ecoute et Orientation.',
+    title: 'AmourConnect – Rencontres sérieuses en ligne',
+    description: 'Trouvez votre âme sœur sur AmourConnect.',
   },
   verification: {
     google: '',
@@ -46,11 +47,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="dark">
-      <body className={`${outfit.variable} font-sans antialiased bg-slate-900 text-white`}>
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={`${outfit.variable} font-sans antialiased transition-colors duration-300`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

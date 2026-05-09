@@ -3,7 +3,7 @@ import { AppInitializer } from '@/components/layout/AppInitializer'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="min-h-screen bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <AppInitializer />
             <AppNavbar />
             {/* Desktop: offset for sidebar */}

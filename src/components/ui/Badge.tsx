@@ -2,19 +2,20 @@ import { cn } from '@/lib/utils'
 
 interface BadgeProps {
     children: React.ReactNode
-    variant?: 'default' | 'premium' | 'success' | 'warning' | 'danger' | 'outline'
+    variant?: 'default' | 'premium' | 'success' | 'warning' | 'danger' | 'outline' | 'secondary'
     size?: 'sm' | 'md'
     className?: string
 }
 
 export function Badge({ children, variant = 'default', size = 'md', className }: BadgeProps) {
     const variants = {
-        default: 'bg-slate-700 text-slate-300',
+        default: 'bg-slate-100 text-slate-700',
+        secondary: 'bg-rose-50 text-rose-600',
         premium: 'bg-gradient-to-r from-amber-500 to-yellow-600 text-white',
-        success: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30',
-        warning: 'bg-amber-500/20 text-amber-400 border border-amber-500/30',
-        danger: 'bg-red-500/20 text-red-400 border border-red-500/30',
-        outline: 'border border-rose-500/50 text-rose-400',
+        success: 'bg-emerald-50 text-emerald-700 border border-emerald-100',
+        warning: 'bg-amber-50 text-amber-700 border border-amber-100',
+        danger: 'bg-red-50 text-red-700 border border-red-100',
+        outline: 'border border-rose-500/50 text-rose-500',
     }
 
     const sizes = {

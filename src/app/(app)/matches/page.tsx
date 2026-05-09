@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import Image from 'next/image'
 import { Heart, MessageCircle, Star, Clock } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
@@ -142,8 +141,8 @@ export default function MatchesPage() {
 
     if (isLoading || authLoading) {
         return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="h-10 w-10 rounded-full border-2 border-slate-700 border-t-rose-500 animate-spin" />
+            <div className="flex items-center justify-center min-vh-screen">
+                <div className="h-10 w-10 rounded-full border-2 border-slate-200 border-t-rose-500 animate-spin" />
             </div>
         )
     }
@@ -151,11 +150,11 @@ export default function MatchesPage() {
     return (
         <div className="max-w-4xl mx-auto px-4 py-8 space-y-8 animate-in fade-in duration-500">
             <div className="mb-8">
-                <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
                     <Heart className="h-6 w-6 text-rose-500 fill-rose-500" />
                     Mes Matchs
                 </h1>
-                <p className="text-slate-400 mt-1">
+                <p className="text-slate-500 mt-1">
                     {matches.length} match{matches.length !== 1 ? 's' : ''} — Commencez à discuter !
                 </p>
             </div>
@@ -163,8 +162,8 @@ export default function MatchesPage() {
             {/* Who liked me */}
             <section className="mb-8">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                        <Star className="h-5 w-5 text-amber-400" />
+                    <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <Star className="h-5 w-5 text-amber-500" />
                         Qui m'a liké
                     </h2>
                     {!isPremium && (
@@ -173,7 +172,7 @@ export default function MatchesPage() {
                 </div>
 
                 {likerProfiles.length === 0 ? (
-                    <div className="rounded-xl border border-dashed border-slate-700 p-6 text-center text-slate-500 text-sm">
+                    <div className="rounded-xl border border-dashed border-slate-200 bg-white p-6 text-center text-slate-500 text-sm shadow-sm">
                         Personne ne vous a encore liké. Continuez à explorer !
                     </div>
                 ) : (
@@ -184,7 +183,7 @@ export default function MatchesPage() {
                                 const isBlurred = !isPremium && idx >= 1
                                 return (
                                     <div key={liker.id} className="relative">
-                                        <div className={`aspect-square rounded-2xl overflow-hidden border border-slate-800 ${isBlurred ? 'cursor-not-allowed' : ''}`}>
+                                        <div className={`aspect-square rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50 ${isBlurred ? 'cursor-not-allowed' : ''}`}>
                                             <div className={isBlurred ? 'filter blur-sm scale-110' : ''}>
                                                 <Image
                                                     src={liker.avatar_url || getAvatarFallbackUrl(liker.full_name)}
@@ -195,13 +194,13 @@ export default function MatchesPage() {
                                                 />
                                             </div>
                                             {isBlurred && (
-                                                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/60">
+                                                <div className="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-[2px]">
                                                     <span className="text-2xl">👑</span>
                                                 </div>
                                             )}
                                         </div>
                                         {!isBlurred && (
-                                            <p className="text-xs text-center text-slate-400 mt-1 truncate">
+                                            <p className="text-xs text-center text-slate-600 font-medium mt-1 truncate">
                                                 {liker.full_name?.split(' ')[0]}
                                             </p>
                                         )}
@@ -212,10 +211,10 @@ export default function MatchesPage() {
                         {!isPremium && likerProfiles.length > 1 && (
                             <div className="mt-4 flex justify-center">
                                 <Button variant="outline" size="sm" asChild>
-                                    <Link href="/premium" className="gap-2">
+                                    <a href="/premium" className="gap-2">
                                         <Star className="h-4 w-4" />
                                         Voir qui vous a liké avec Premium
-                                    </Link>
+                                    </a>
                                 </Button>
                             </div>
                         )}
@@ -225,8 +224,8 @@ export default function MatchesPage() {
 
             {/* Conversations */}
             <section>
-                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <MessageCircle className="h-5 w-5 text-rose-400" />
+                <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <MessageCircle className="h-5 w-5 text-rose-500" />
                     Conversations
                     <span className="ml-1 flex items-center gap-1 text-xs text-slate-500 font-normal">
                         <Clock className="h-3 w-3" />
@@ -241,7 +240,7 @@ export default function MatchesPage() {
                         description="Explorez des profils et likez ceux qui vous plaisent. Quand c'est mutuel, c'est un match !"
                         action={
                             <Button variant="primary" asChild>
-                                <Link href="/search">Découvrir des profils</Link>
+                                <a href="/search">Découvrir des profils</a>
                             </Button>
                         }
                     />
@@ -251,14 +250,14 @@ export default function MatchesPage() {
                             if (!otherProfile) return null
                             const unread = unreadPerMatch[id] ?? 0
                             return (
-                                <Link
+                                <a
                                     key={id}
                                     href={`/messages/${id}`}
-                                    className="flex items-center gap-4 p-4 rounded-2xl border border-slate-800 bg-slate-900 hover:border-rose-500/40 hover:bg-slate-800/50 transition-all duration-200 group"
+                                    className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 bg-white hover:border-rose-500/40 hover:bg-slate-50 transition-all duration-200 group shadow-sm"
                                 >
                                     {/* Avatar + unread badge */}
                                     <div className="relative flex-shrink-0">
-                                        <div className="h-14 w-14 rounded-full overflow-hidden ring-2 ring-slate-700 group-hover:ring-rose-500/50 transition-all">
+                                        <div className="h-14 w-14 rounded-full overflow-hidden ring-2 ring-slate-100 group-hover:ring-rose-500/50 transition-all">
                                             <Image
                                                 src={otherProfile.avatar_url || getAvatarFallbackUrl(otherProfile.full_name)}
                                                 alt={otherProfile.full_name || ''}
@@ -268,7 +267,7 @@ export default function MatchesPage() {
                                             />
                                         </div>
                                         {unread > 0 && (
-                                            <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-rose-500 text-white text-xs font-bold flex items-center justify-center animate-pulse ring-2 ring-slate-900">
+                                            <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center animate-pulse ring-2 ring-white">
                                                 {unread > 9 ? '9+' : unread}
                                             </span>
                                         )}
@@ -277,21 +276,21 @@ export default function MatchesPage() {
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between">
-                                            <p className={`font-semibold truncate ${unread > 0 ? 'text-white' : 'text-slate-200'}`}>
+                                            <p className={`font-semibold truncate ${unread > 0 ? 'text-slate-900' : 'text-slate-700'}`}>
                                                 {otherProfile.full_name}
                                             </p>
                                             <p className="text-xs text-slate-500 flex-shrink-0 ml-2">
                                                 {lastMsg ? formatDate(lastMsg.created_at) : ''}
                                             </p>
                                         </div>
-                                        <p className={`text-sm truncate mt-0.5 ${unread > 0 ? 'text-white font-medium' : 'text-slate-400'}`}>
+                                        <p className={`text-sm truncate mt-0.5 ${unread > 0 ? 'text-slate-900 font-semibold' : 'text-slate-500'}`}>
                                             {lastMsg?.content || `💕 Match avec ${otherProfile.full_name?.split(' ')[0]} !`}
                                         </p>
                                     </div>
 
                                     {/* Icon */}
-                                    <MessageCircle className={`h-5 w-5 flex-shrink-0 ${unread > 0 ? 'text-rose-400' : 'text-slate-600'} group-hover:text-rose-400 transition-colors`} />
-                                </Link>
+                                    <MessageCircle className={`h-5 w-5 flex-shrink-0 ${unread > 0 ? 'text-rose-500' : 'text-slate-300'} group-hover:text-rose-500 transition-colors`} />
+                                </a>
                             )
                         })}
                     </div>

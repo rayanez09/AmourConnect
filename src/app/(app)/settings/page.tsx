@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { Settings as SettingsIcon, Shield, Bell, User, Lock, Heart, LogOut } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/Card'
 
@@ -28,7 +27,7 @@ export default async function SettingsPage() {
                 {/* Account Section */}
                 <Card className="bg-slate-900 border-slate-800">
                     <CardContent className="p-0">
-                        <Link href="/profile/setup" className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800">
+                        <a href="/profile/setup" className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-slate-800 rounded-lg"><User className="h-5 w-5 text-slate-300" /></div>
                                 <div>
@@ -36,7 +35,7 @@ export default async function SettingsPage() {
                                     <p className="text-sm text-slate-400">Modifier vos photos, description et infos</p>
                                 </div>
                             </div>
-                        </Link>
+                        </a>
 
                         <div className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800 cursor-pointer">
                             <div className="flex items-center gap-3">
@@ -64,15 +63,15 @@ export default async function SettingsPage() {
 
                 <Card className="bg-slate-900 border-slate-800">
                     <CardContent className="p-0">
-                        <Link href="/premium" className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800">
+                        <a href="/premium" className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors border-b border-slate-800">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-amber-500/10 rounded-lg"><Heart className="h-5 w-5 text-amber-500" /></div>
                                 <div>
-                                    <h3 className="text-white font-medium">Ecoute et Orientation Premium</h3>
+                                    <h3 className="text-white font-medium">AmourConnect Premium</h3>
                                     <p className="text-sm text-slate-400">Gérer votre abonnement exclusif</p>
                                 </div>
                             </div>
-                        </Link>
+                        </a>
 
                         <div className="flex items-center justify-between p-4 hover:bg-slate-800/50 transition-colors cursor-pointer">
                             <div className="flex items-center gap-3">
@@ -88,7 +87,7 @@ export default async function SettingsPage() {
 
                 {/* Log Out Box */}
                 <div className="pt-8">
-                    <p className="text-sm text-slate-500 text-center mb-4">Version 0.1.0 — Ecoute et Orientation</p>
+                    <p className="text-sm text-slate-500 text-center mb-4">Version 0.1.0 — AmourConnect</p>
                 </div>
             </div>
         </div>

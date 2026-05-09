@@ -3,7 +3,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Send, MapPin, MoreVertical, Flag, Ban, Clock } from 'lucide-react'
 import { useRealtimeMessages } from '@/hooks/useRealtimeMessages'
@@ -63,7 +62,7 @@ export default function ConversationPage() {
             .eq('id', matchId)
             .maybeSingle()
             .then(async ({ data }: { data: any }) => {
-                if (!data) return router.push('/matches')
+                if (!data) return window.location.href = '/matches'
                 const myProfileId = currentProfile.id
                 const otherId = data.user1_id === myProfileId ? data.user2_id : data.user1_id
 
@@ -128,12 +127,12 @@ export default function ConversationPage() {
             {/* ── Header ────────────────────────────────────────────────────── */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-slate-800 bg-slate-900 flex-shrink-0">
                 <button
-                    onClick={() => router.push('/matches')}
+                    onClick={() => window.location.href = '/matches'}
                     className="text-slate-400 hover:text-white transition-colors lg:hidden"
                 >
                     <ArrowLeft className="h-5 w-5" />
                 </button>
-                <Link href={`/profile/${otherProfile?.id}`} className="flex items-center gap-3 flex-1 min-w-0">
+                <a href={`/profile/${otherProfile?.id}`} className="flex items-center gap-3 flex-1 min-w-0">
                     <Avatar
                         src={otherProfile?.avatar_url}
                         name={otherProfile?.full_name}
@@ -147,7 +146,7 @@ export default function ConversationPage() {
                             {otherProfile?.city || 'Localisation inconnue'}
                         </p>
                     </div>
-                </Link>
+                </a>
 
                 {/* Options menu */}
                 <div className="relative flex-shrink-0">

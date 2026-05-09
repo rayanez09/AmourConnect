@@ -1,7 +1,6 @@
 ﻿// @ts-nocheck
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import Image from 'next/image'
 import {
     Heart,
@@ -100,15 +99,15 @@ export default async function DashboardPage() {
     }
 
     const stats = [
-        { label: "J'aime envoyés", value: likesRes.count ?? 0, icon: Heart, color: 'text-rose-400' },
-        { label: 'Matchs', value: matchesRes.count ?? 0, icon: Star, color: 'text-amber-400' },
-        { label: 'Messages non lus', value: messagesRes.count ?? 0, icon: MessageCircle, color: 'text-blue-400' },
+        { label: "J'aime envoyés", value: likesRes.count ?? 0, icon: Heart, color: 'text-rose-500' },
+        { label: 'Matchs', value: matchesRes.count ?? 0, icon: Star, color: 'text-amber-500' },
+        { label: 'Messages non lus', value: messagesRes.count ?? 0, icon: MessageCircle, color: 'text-blue-500' },
     ]
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
             {/* Welcome banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-900/40 via-slate-900 to-pink-900/30 border border-rose-500/20 p-6 mb-8">
+            <div className="relative overflow-hidden rounded-2xl gradient-welcome border p-6 mb-8 shadow-sm">
                 <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <Avatar
                         src={p.avatar_url}
@@ -118,35 +117,35 @@ export default async function DashboardPage() {
                     />
                     <div className="flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                            <h1 className="text-2xl font-bold text-white">
+                            <h1 className="text-2xl font-bold text-slate-900">
                                 Bonjour, {p.full_name?.split(' ')[0]} ! 👋
                             </h1>
                             {p.is_premium && <Badge variant="premium">👑 Premium</Badge>}
                         </div>
-                        <p className="text-slate-400 mt-1">
+                        <p className="text-slate-500 mt-1">
                             {p.city ? `📍 ${p.city}` : 'Complétez votre profil pour de meilleures suggestions'}
                         </p>
                     </div>
                     <div className="flex gap-3 flex-wrap">
                         <Button variant="primary" size="sm" asChild>
-                            <Link href="/search" className="gap-2">
+                            <a href="/search" className="gap-2 bg-rose-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-rose-600 transition-colors">
                                 <Search className="h-4 w-4" />
                                 Découvrir
-                            </Link>
+                            </a>
                         </Button>
                         {!p.is_premium && (
                             <Button variant="outline" size="sm" asChild>
-                                <Link href="/premium" className="gap-2">
+                                <a href="/premium" className="gap-2 border border-slate-200 px-4 py-2 rounded-lg flex items-center hover:bg-slate-50 transition-colors">
                                     <Crown className="h-4 w-4" />
                                     Premium
-                                </Link>
+                                </a>
                             </Button>
                         )}
                     </div>
                 </div>
-                {/* Decorative circles */}
-                <div className="absolute -top-20 -right-20 h-48 w-48 rounded-full bg-rose-500/10 blur-3xl" />
-                <div className="absolute -bottom-10 right-20 h-32 w-32 rounded-full bg-pink-500/10 blur-2xl" />
+                {/* Decorative circles - Hide or change in dark mode */}
+                <div className="absolute -top-20 -right-20 h-48 w-48 rounded-full bg-rose-500/10 blur-3xl dark:bg-blue-500/5" />
+                <div className="absolute -bottom-10 right-20 h-32 w-32 rounded-full bg-pink-500/10 blur-2xl dark:bg-indigo-500/5" />
             </div>
 
             {/* Stats */}
@@ -154,11 +153,11 @@ export default async function DashboardPage() {
                 {stats.map(({ label, value, icon: Icon, color }) => (
                     <Card key={label} glass className="p-4">
                         <CardContent className="p-0 flex flex-col items-center text-center gap-2">
-                            <div className="p-3 rounded-xl bg-slate-800">
+                            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 stats-icon-bg">
                                 <Icon className={`h-5 w-5 ${color}`} />
                             </div>
-                            <span className="text-2xl font-bold text-white">{value}</span>
-                            <span className="text-xs text-slate-400">{label}</span>
+                            <span className="text-2xl font-bold text-slate-900">{value}</span>
+                            <span className="text-xs text-slate-500 font-medium">{label}</span>
                         </CardContent>
                     </Card>
                 ))}
@@ -166,18 +165,18 @@ export default async function DashboardPage() {
 
             {/* Profile completion banner */}
             {(!p.bio || !p.avatar_url || !p.age) && (
-                <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 p-4 mb-8 flex items-center justify-between gap-4">
+                <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 dark:bg-blue-500/10 dark:border-blue-500/30 p-4 mb-8 flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-amber-500/20 flex items-center justify-center">
-                            <TrendingUp className="h-5 w-5 text-amber-400" />
+                        <div className="h-10 w-10 rounded-xl bg-amber-500/20 dark:bg-blue-500/20 flex items-center justify-center">
+                            <TrendingUp className="h-5 w-5 text-amber-400 dark:text-blue-400" />
                         </div>
                         <div>
-                            <p className="font-semibold text-white text-sm">Complétez votre profil</p>
-                            <p className="text-xs text-slate-400">Un profil complet reçoit 5x plus de visites</p>
+                            <p className="font-semibold text-slate-900 text-sm">Complétez votre profil</p>
+                            <p className="text-xs text-slate-500">Un profil complet reçoit 5x plus de visites</p>
                         </div>
                     </div>
                     <Button variant="outline" size="sm" asChild>
-                        <Link href="/profile/edit">Compléter</Link>
+                        <a href="/profile/edit">Compléter</a>
                     </Button>
                 </div>
             )}
@@ -185,35 +184,35 @@ export default async function DashboardPage() {
             {/* Suggestions */}
             <section>
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                    <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                         <Flame className="h-5 w-5 text-rose-500" />
                         Profils suggérés
                     </h2>
-                    <Link
+                    <a
                         href="/search"
-                        className="flex items-center gap-1 text-sm text-rose-400 hover:text-rose-300 transition-colors"
+                        className="flex items-center gap-1 text-sm text-rose-500 hover:text-rose-600 font-medium transition-colors"
                     >
                         Voir tout <ArrowRight className="h-4 w-4" />
-                    </Link>
+                    </a>
                 </div>
 
                 {discoveryProfiles.length === 0 ? (
                     <Card className="p-12 text-center">
                         <CardContent className="p-0">
                             <div className="text-5xl mb-4">🌍</div>
-                            <p className="text-white font-semibold">Pas encore de suggestions</p>
-                            <p className="text-slate-400 text-sm mt-2">Complétez votre profil pour voir des suggestions</p>
+                            <p className="text-slate-900 font-semibold">Pas encore de suggestions</p>
+                            <p className="text-slate-500 text-sm mt-2">Complétez votre profil pour voir des suggestions</p>
                         </CardContent>
                     </Card>
                 ) : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {discoveryProfiles.map((dp) => (
-                            <Link
+                            <a
                                 key={dp.id}
                                 href={`/profile/${dp.id}`}
-                                className="group rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden hover:border-rose-500/40 hover:shadow-lg hover:shadow-rose-500/10 transition-all duration-300"
+                                className="group rounded-2xl border border-slate-100 bg-white overflow-hidden hover:border-rose-500/40 hover:shadow-lg hover:shadow-rose-500/5 transition-all duration-300 shadow-sm"
                             >
-                                <div className="relative aspect-square bg-slate-800">
+                                <div className="relative aspect-square bg-slate-50">
                                     <Image
                                         src={dp.avatar_url || getAvatarFallbackUrl(dp.full_name)}
                                         alt={dp.full_name || 'Profil'}
@@ -221,20 +220,20 @@ export default async function DashboardPage() {
                                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                                         unoptimized
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-transparent via-transparent to-transparent suggestion-overlay" />
                                     {dp.is_premium && (
                                         <div className="absolute top-2 left-2">
                                             <Badge variant="premium" size="sm">👑</Badge>
                                         </div>
                                     )}
                                     <div className="absolute bottom-0 left-0 right-0 p-3">
-                                        <p className="font-bold text-white text-sm truncate">
+                                        <p className="font-bold text-slate-900 text-sm truncate">
                                             {dp.full_name?.split(' ')[0]}, {dp.age}
                                         </p>
-                                        <p className="text-xs text-slate-300 truncate">📍 {dp.city}</p>
+                                        <p className="text-xs text-slate-600 truncate">📍 {dp.city}</p>
                                     </div>
                                 </div>
-                            </Link>
+                            </a>
                         ))}
                     </div>
                 )}
@@ -242,25 +241,25 @@ export default async function DashboardPage() {
 
             {/* Quick access */}
             <section className="mt-8">
-                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                     <Users className="h-5 w-5 text-rose-500" />
                     Accès rapide
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {[
-                        { href: '/matches', label: 'Mes matchs', icon: Heart, color: 'from-rose-500/20 to-pink-600/20', border: 'border-rose-500/20', text: 'text-rose-400' },
-                        { href: '/messages', label: 'Messages', icon: MessageCircle, color: 'from-blue-500/20 to-cyan-600/20', border: 'border-blue-500/20', text: 'text-blue-400' },
-                        { href: '/search', label: 'Recherche', icon: Search, color: 'from-violet-500/20 to-purple-600/20', border: 'border-violet-500/20', text: 'text-violet-400' },
-                        { href: '/profile/edit', label: 'Mon profil', icon: Star, color: 'from-amber-500/20 to-yellow-600/20', border: 'border-amber-500/20', text: 'text-amber-400' },
-                    ].map(({ href, label, icon: Icon, color, border, text }) => (
-                        <Link
+                        { href: '/matches', label: 'Mes matchs', icon: Heart, gradient: 'gradient-rose' },
+                        { href: '/messages', label: 'Messages', icon: MessageCircle, gradient: 'gradient-blue' },
+                        { href: '/search', label: 'Recherche', icon: Search, gradient: 'gradient-violet' },
+                        { href: '/profile/edit', label: 'Mon profil', icon: Star, gradient: 'gradient-amber' },
+                    ].map(({ href, label, icon: Icon, gradient }) => (
+                        <a
                             key={href}
                             href={href}
-                            className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-gradient-to-br ${color} border ${border} hover:scale-105 transition-all duration-200`}
+                            className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-gradient-to-br ${gradient} gradient-quick-access border hover:scale-105 shadow-sm transition-all duration-200`}
                         >
-                            <Icon className={`h-8 w-8 ${text}`} />
-                            <span className={`text-sm font-medium ${text}`}>{label}</span>
-                        </Link>
+                            <Icon className="h-8 w-8" />
+                            <span className="text-sm font-semibold">{label}</span>
+                        </a>
                     ))}
                 </div>
             </section>

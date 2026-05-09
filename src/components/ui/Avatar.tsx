@@ -44,8 +44,8 @@ export function Avatar({
                 className={cn(
                     s.container,
                     'rounded-full overflow-hidden ring-2',
-                    premium ? 'ring-amber-400' : 'ring-slate-700',
-                    'bg-slate-800'
+                    premium ? 'ring-amber-400' : 'ring-slate-100',
+                    'bg-slate-50 shadow-sm'
                 )}
             >
                 {showImage ? (
@@ -67,7 +67,7 @@ export function Avatar({
             {online !== undefined && (
                 <span
                     className={cn(
-                        'absolute bottom-0 right-0 rounded-full border-2 border-slate-900',
+                        'absolute bottom-0 right-0 rounded-full border-2 border-white',
                         s.indicator,
                         online ? 'bg-emerald-400' : 'bg-slate-500'
                     )}

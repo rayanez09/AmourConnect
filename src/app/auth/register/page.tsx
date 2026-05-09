@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -52,17 +51,17 @@ export default function RegisterPage() {
 
     if (emailSent) {
         return (
-            <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6">
+            <div className="min-h-screen bg-white flex items-center justify-center p-6">
                 <div className="w-full max-w-md text-center space-y-6">
                     <div className="h-20 w-20 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto">
-                        <CheckCircle className="h-10 w-10 text-emerald-400" />
+                        <CheckCircle className="h-10 w-10 text-emerald-500" />
                     </div>
-                    <h1 className="text-3xl font-bold text-white">Vérifiez votre email</h1>
-                    <p className="text-slate-400">
+                    <h1 className="text-3xl font-bold text-slate-900">Vérifiez votre email</h1>
+                    <p className="text-slate-600">
                         Nous avons envoyé un lien de confirmation à votre adresse email. Cliquez sur le lien pour activer votre compte.
                     </p>
-                    <div className="p-4 rounded-xl bg-slate-800 border border-slate-700">
-                        <p className="text-sm text-slate-300">
+                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                        <p className="text-sm text-slate-600">
                             💡 Si vous ne trouvez pas l'email, vérifiez votre dossier spam.
                         </p>
                     </div>
@@ -75,25 +74,25 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 py-12">
+        <div className="min-h-screen bg-white flex items-center justify-center p-6 py-12">
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center">
-                    <Link href="/" className="inline-flex items-center gap-3 mb-6">
+                    <a href="/" className="inline-flex items-center gap-3 mb-6">
                         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg">
                             <Heart className="h-6 w-6 text-white fill-white" />
                         </div>
-                        <span className="text-2xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
-                    </Link>
-                    <h1 className="text-3xl font-bold text-white">Créer un compte</h1>
-                    <p className="text-slate-400 mt-2">
+                        <span className="text-2xl font-bold text-slate-900">Ecoute et <span className="text-rose-500">Orientation</span></span>
+                    </a>
+                    <h1 className="text-3xl font-bold text-slate-900">Créer un compte</h1>
+                    <p className="text-slate-500 mt-2">
                         Déjà membre ?{' '}
-                        <Link href="/auth/login" className="text-rose-400 hover:text-rose-300 font-medium transition-colors">
+                        <a href="/auth/login" className="text-rose-600 hover:text-rose-700 font-medium transition-colors">
                             Se connecter
-                        </Link>
+                        </a>
                     </p>
                 </div>
 
-                <div className="bg-slate-900 rounded-2xl border border-slate-800 p-8 space-y-5">
+                <div className="bg-white rounded-2xl border border-slate-100 p-8 space-y-5 shadow-sm">
                     <Input
                         label="Adresse email"
                         type="email"
@@ -143,7 +142,7 @@ export default function RegisterPage() {
                                 className="mt-0.5 h-4 w-4 accent-rose-500"
                                 {...register('isAdult')}
                             />
-                            <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                            <span className="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">
                                 Je certifie avoir 18 ans ou plus
                             </span>
                         </label>
@@ -155,15 +154,15 @@ export default function RegisterPage() {
                                 className="mt-0.5 h-4 w-4 accent-rose-500"
                                 {...register('acceptTerms')}
                             />
-                            <span className="text-sm text-slate-300 group-hover:text-white transition-colors">
+                            <span className="text-sm text-slate-600 group-hover:text-slate-900 transition-colors">
                                 J'accepte les{' '}
-                                <Link href="/legal/terms" className="text-rose-400 hover:underline">
+                                <a href="/legal/terms" className="text-rose-400 hover:underline">
                                     Conditions d'utilisation
-                                </Link>{' '}
+                                </a>{' '}
                                 et la{' '}
-                                <Link href="/legal/privacy" className="text-rose-400 hover:underline">
+                                <a href="/legal/privacy" className="text-rose-400 hover:underline">
                                     Politique de confidentialité
-                                </Link>
+                                </a>
                             </span>
                         </label>
                         {errors.acceptTerms && <p className="text-xs text-red-400 ml-7">⚠ {errors.acceptTerms.message}</p>}

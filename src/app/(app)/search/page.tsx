@@ -125,8 +125,8 @@ export default function SearchPage() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Découvrir</h1>
-                    <p className="text-slate-400 text-sm mt-0.5">
+                    <h1 className="text-2xl font-bold text-slate-900">Découvrir</h1>
+                    <p className="text-slate-500 text-sm mt-0.5">
                         {isLoading || authLoading ? 'Recherche...' : `${total} profil${total !== 1 ? 's' : ''} trouvé${total !== 1 ? 's' : ''}`}
                     </p>
                 </div>
@@ -153,13 +153,13 @@ export default function SearchPage() {
 
             {/* Filters panel */}
             {showFilters && (
-                <div className="rounded-2xl border border-slate-800 bg-slate-900 p-5 mb-6 animate-in fade-in duration-200">
+                <div className="rounded-2xl border border-slate-100 bg-white p-5 mb-6 shadow-sm animate-in fade-in duration-200">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="font-semibold text-white">Filtrer les résultats</h2>
+                        <h2 className="font-semibold text-slate-900">Filtrer les résultats</h2>
                         {hasActiveFilters && (
                             <button
                                 onClick={clearFilters}
-                                className="flex items-center gap-1 text-sm text-rose-400 hover:text-rose-300"
+                                className="flex items-center gap-1 text-sm text-rose-500 hover:text-rose-600"
                             >
                                 <X className="h-3 w-3" /> Effacer
                             </button>
@@ -168,11 +168,11 @@ export default function SearchPage() {
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         {/* Gender */}
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-slate-300">Genre</label>
+                            <label className="text-sm font-medium text-slate-600">Genre</label>
                             <select
                                 value={genderFilter}
                                 onChange={(e) => setGenderFilter(e.target.value)}
-                                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none"
+                                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 focus:outline-none transition-all"
                             >
                                 {GENDER_OPTIONS.map((opt) => (
                                     <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -181,7 +181,7 @@ export default function SearchPage() {
                         </div>
                         {/* Min age */}
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-slate-300">Âge min</label>
+                            <label className="text-sm font-medium text-slate-600">Âge min</label>
                             <input
                                 type="number"
                                 value={minAge}
@@ -189,12 +189,12 @@ export default function SearchPage() {
                                 placeholder="18"
                                 min={18}
                                 max={99}
-                                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none"
+                                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 focus:outline-none transition-all"
                             />
                         </div>
                         {/* Max age */}
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-slate-300">Âge max</label>
+                            <label className="text-sm font-medium text-slate-600">Âge max</label>
                             <input
                                 type="number"
                                 value={maxAge}
@@ -202,18 +202,18 @@ export default function SearchPage() {
                                 placeholder="99"
                                 min={18}
                                 max={99}
-                                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none"
+                                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 focus:outline-none transition-all"
                             />
                         </div>
                         {/* City */}
                         <div className="space-y-1.5">
-                            <label className="text-sm font-medium text-slate-300">Ville</label>
+                            <label className="text-sm font-medium text-slate-600">Ville</label>
                             <input
                                 type="text"
                                 value={cityInput}
                                 onChange={(e) => setCityInput(e.target.value)}
                                 placeholder="Paris, Lyon..."
-                                className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none"
+                                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 focus:outline-none transition-all"
                             />
                         </div>
                     </div>

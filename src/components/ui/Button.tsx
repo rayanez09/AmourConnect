@@ -20,11 +20,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             primary:
                 'bg-gradient-to-r from-rose-500 to-pink-600 text-white hover:from-rose-600 hover:to-pink-700 shadow-lg hover:shadow-rose-500/30 active:scale-[0.98]',
             secondary:
-                'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700',
+                'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200',
             outline:
                 'border-2 border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white',
             ghost:
-                'text-slate-300 hover:bg-slate-800 hover:text-white',
+                'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
             danger:
                 'bg-red-600 text-white hover:bg-red-700 shadow-lg hover:shadow-red-500/30',
         }

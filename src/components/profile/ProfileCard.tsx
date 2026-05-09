@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Heart, X, MessageCircle, MapPin, Shield } from 'lucide-react'
 import { cn, getAvatarFallbackUrl, GENDER_LABELS } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
@@ -50,39 +49,39 @@ export function ProfileCard({
 
     if (compact) {
         return (
-            <Link
+            <a
                 href={`/profile/${profile.id}`}
                 className={cn(
-                    'flex items-center gap-3 p-3 rounded-xl border border-slate-800 bg-slate-900',
-                    'hover:border-rose-500/40 hover:bg-slate-800/50 transition-all duration-200'
+                    'flex items-center gap-3 p-3 rounded-xl border border-slate-100 bg-white shadow-sm',
+                    'hover:border-rose-500/40 hover:bg-slate-50 transition-all duration-200'
                 )}
             >
-                <div className="relative h-12 w-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-slate-700">
+                <div className="relative h-12 w-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-slate-100">
                     <Image src={avatarSrc} alt={profile.full_name || 'Profil'} fill className="object-cover" onError={() => setImgError(true)} />
                 </div>
                 <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-white truncate">{profile.full_name}</p>
-                    <p className="text-sm text-slate-400 truncate">
+                    <p className="font-semibold text-slate-900 truncate">{profile.full_name}</p>
+                    <p className="text-sm text-slate-500 truncate">
                         {profile.age} ans · {profile.city}
                     </p>
                 </div>
                 {isMatched && (
                     <Badge variant="success" size="sm">Match 💕</Badge>
                 )}
-            </Link>
+            </a>
         )
     }
 
     return (
         <div
             className={cn(
-                'group rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden',
-                'transition-all duration-300 hover:border-rose-500/40 hover:shadow-xl hover:shadow-rose-500/10',
-                'flex flex-col'
+                'group rounded-2xl border border-slate-100 bg-white overflow-hidden',
+                'transition-all duration-300 hover:border-rose-500/40 hover:shadow-xl hover:shadow-rose-500/5',
+                'flex flex-col shadow-sm'
             )}
         >
             {/* Photo */}
-            <Link href={`/profile/${profile.id}`} className="relative block aspect-[3/4] overflow-hidden bg-slate-800">
+            <a href={`/profile/${profile.id}`} className="relative block aspect-[3/4] overflow-hidden bg-slate-100">
                 <Image
                     src={avatarSrc}
                     alt={profile.full_name || 'Profil'}
@@ -90,8 +89,7 @@ export function ProfileCard({
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={() => setImgError(true)}
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
+                {/* Removed gradient overlay as per user request */}
 
                 {/* Badges */}
                 <div className="absolute top-3 left-3 flex gap-2">
@@ -111,25 +109,24 @@ export function ProfileCard({
 
                 {/* Name overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-lg font-bold text-white">
+                    <h3 className="text-lg font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {profile.full_name}, {profile.age}
                     </h3>
-                    <div className="flex items-center gap-1 text-slate-300 text-sm mt-0.5">
+                    <div className="flex items-center gap-1 text-white/90 text-sm mt-0.5">
                         <MapPin className="h-3 w-3 flex-shrink-0" />
-                        <span className="truncate">{profile.city}</span>
+                        <span className="truncate drop-shadow-sm">{profile.city}</span>
                     </div>
                 </div>
-            </Link>
+            </a>
 
-            {/* Content */}
             <div className="p-4 flex-1 flex flex-col gap-3">
                 {profile.bio && (
-                    <p className="text-sm text-slate-400 line-clamp-2">{profile.bio}</p>
+                    <p className="text-sm text-slate-600 line-clamp-2">{profile.bio}</p>
                 )}
-                <div className="flex flex-wrap gap-1.5">
-                    <Badge variant="default">{GENDER_LABELS[profile.gender || 'autre']}</Badge>
+                <div className="flex flex-wrap gap-1.5 text-slate-600 font-medium">
+                    <Badge variant="secondary">{GENDER_LABELS[profile.gender || 'autre']}</Badge>
                     {profile.postal_code && (
-                        <Badge variant="default">{profile.postal_code}</Badge>
+                        <Badge variant="secondary">{profile.postal_code}</Badge>
                     )}
                 </div>
 
@@ -143,15 +140,15 @@ export function ProfileCard({
                                 className="flex-1 gap-2"
                                 asChild
                             >
-                                <Link href={`/messages/${matchId}`}>
+                                <a href={`/messages/${matchId}`}>
                                     <MessageCircle className="h-4 w-4" />
                                     Envoyer un message
-                                </Link>
+                                </a>
                             </Button>
                         ) : liked ? (
-                            <div className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-rose-500/10 border border-rose-500/30">
-                                <Heart className="h-4 w-4 text-rose-400 fill-rose-400" />
-                                <span className="text-rose-400 text-sm font-medium">Liké !</span>
+                            <div className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-rose-50 border border-rose-100">
+                                <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
+                                <span className="text-rose-600 text-sm font-bold">Liké !</span>
                             </div>
                         ) : (
                             <>
@@ -160,7 +157,7 @@ export function ProfileCard({
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => onDislike(profile.id)}
-                                        className="border border-slate-700 hover:border-red-500/50 hover:text-red-400"
+                                        className="border border-slate-200 hover:border-rose-500/50 hover:text-rose-600 bg-white"
                                     >
                                         <X className="h-4 w-4" />
                                     </Button>

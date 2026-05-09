@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -78,9 +77,9 @@ function LoginForm() {
             />
 
             <div className="flex justify-end">
-                <Link href="/auth/forgot-password" className="text-sm text-rose-400 hover:text-rose-300 transition-colors">
+                <a href="/auth/forgot-password" className="text-sm text-rose-400 hover:text-rose-300 transition-colors">
                     Mot de passe oublié ?
-                </Link>
+                </a>
             </div>
 
             <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>
@@ -92,23 +91,23 @@ function LoginForm() {
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen bg-slate-950 flex">
+        <div className="min-h-screen bg-white flex">
             {/* Left decorative panel */}
-            <div className="hidden lg:flex flex-col justify-between w-1/2 bg-gradient-to-br from-rose-900/40 via-slate-900 to-pink-900/30 p-12 border-r border-slate-800">
-                <Link href="/" className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center shadow-lg">
+            <div className="hidden lg:flex flex-col justify-between w-1/2 bg-gradient-to-br from-rose-50 to-white lg:from-rose-50 lg:via-white lg:to-rose-50 p-12 border-r border-slate-100">
+                <a href="/" className="flex items-center gap-3 mb-10">
+                    <div className="h-10 w-10 rounded-xl bg-rose-500 flex items-center justify-center">
                         <Heart className="h-6 w-6 text-white fill-white" />
                     </div>
-                    <span className="text-2xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
-                </Link>
+                    <span className="text-2xl font-bold text-slate-900">Ecoute et <span className="text-rose-500">Orientation</span></span>
+                </a>
 
                 <div className="space-y-6">
-                    <h2 className="text-5xl font-bold text-white leading-tight">
+                    <h2 className="text-5xl font-bold text-slate-900 leading-tight">
                         Votre histoire <br />
-                        <span className="text-gradient">d'amour</span> <br />
+                        <span className="text-rose-500">d'amour</span> <br />
                         commence ici.
                     </h2>
-                    <p className="text-slate-400 text-lg max-w-md">
+                    <p className="text-slate-600 text-lg max-w-md">
                         Rejoignez des milliers de célibataires sérieux et trouvez votre âme sœur en toute confiance.
                     </p>
 
@@ -119,8 +118,8 @@ export default function LoginPage() {
                             { label: 'Satisfaction', value: '94%' },
                         ].map((stat) => (
                             <div key={stat.label}>
-                                <div className="text-2xl font-bold text-white">{stat.value}</div>
-                                <div className="text-sm text-slate-400">{stat.label}</div>
+                                <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
+                                <div className="text-sm text-slate-500">{stat.label}</div>
                             </div>
                         ))}
                     </div>
@@ -136,21 +135,21 @@ export default function LoginPage() {
                 <div className="w-full max-w-md space-y-8">
                     {/* Mobile logo */}
                     <div className="lg:hidden flex justify-center">
-                        <Link href="/" className="flex items-center gap-3">
+                        <a href="/" className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
                                 <Heart className="h-6 w-6 text-white fill-white" />
                             </div>
-                            <span className="text-2xl font-bold text-white">Ecoute et <span className="text-rose-500">Orientation</span></span>
-                        </Link>
+                            <span className="text-2xl font-bold text-slate-900">Ecoute et <span className="text-rose-500">Orientation</span></span>
+                        </a>
                     </div>
 
                     <div className="text-center lg:text-left">
-                        <h1 className="text-3xl font-bold text-white">Connexion</h1>
-                        <p className="text-slate-400 mt-2">
+                        <h1 className="text-3xl font-bold text-slate-900">Connexion</h1>
+                        <p className="text-slate-500 mt-2">
                             Pas encore membre ?{' '}
-                            <Link href="/auth/register" className="text-rose-400 hover:text-rose-300 font-medium transition-colors">
+                            <a href="/auth/register" className="text-rose-400 hover:text-rose-300 font-medium transition-colors">
                                 Créer un compte
-                            </Link>
+                            </a>
                         </p>
                     </div>
 
@@ -160,9 +159,9 @@ export default function LoginPage() {
 
                     <p className="text-center text-xs text-slate-500">
                         En vous connectant, vous acceptez nos{' '}
-                        <Link href="/legal/terms" className="text-rose-400 hover:underline">CGU</Link>
+                        <a href="/legal/terms" className="text-rose-400 hover:underline">CGU</a>
                         {' '}et notre{' '}
-                        <Link href="/legal/privacy" className="text-rose-400 hover:underline">Politique de confidentialité</Link>.
+                        <a href="/legal/privacy" className="text-rose-400 hover:underline">Politique de confidentialité</a>.
                     </p>
                 </div>
             </div>

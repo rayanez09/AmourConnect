@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { Info, MessageCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { ProfileActions } from '@/components/profile/ProfileActions'
@@ -55,33 +54,33 @@ export default async function ProfilePage({ params }: { params: Promise<{ id: st
             {/* Content */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="md:col-span-2 space-y-6">
-                    <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800">
-                        <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm">
+                        <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                             <Info className="h-5 w-5 text-rose-500" />
                             À propos
                         </h2>
-                        <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
+                        <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
                             {profile.bio || "Ce membre n'a pas encore rédigé de description."}
                         </p>
                     </div>
                 </div>
 
                 <div className="space-y-6">
-                    <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 sticky top-24">
+                    <div className="p-6 rounded-3xl bg-white border border-slate-100 shadow-sm sticky top-24">
                         {isMatched ? (
-                            <Link href={`/messages/${matchData.id}`}>
+                            <a href={`/messages/${matchData.id}`}>
                                 <Button className="w-full gap-2" size="lg">
                                     <MessageCircle className="h-5 w-5" />
                                     Envoyer un message
                                 </Button>
-                            </Link>
+                            </a>
                         ) : currentUserProfile?.id === profile.id ? (
                             <Button variant="outline" className="w-full gap-2" size="lg" disabled>
                                 C'est votre profil
                             </Button>
                         ) : (
                             <div className="space-y-4 text-center">
-                                <p className="text-sm text-slate-400">
+                                <p className="text-sm text-slate-500">
                                     Discutez avec {profile.full_name?.split(' ')[0]} pour en découvrir plus.
                                 </p>
                                 <ProfileActions

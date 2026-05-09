@@ -14,16 +14,62 @@
   --color-pink-500: #ec4899;
   --color-pink-600: #db2777;
 
+  /* Custom CSS Variables for Theme */
+  --bg-main: var(--color-slate-50);
+  --bg-card: white;
+  --bg-sidebar: white;
+  --text-main: var(--color-slate-900);
+  --text-muted: var(--color-slate-500);
+  --border-main: var(--color-slate-100);
+  --bg-input: var(--color-slate-50);
+
+  /* Light Theme Palette */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
   --color-slate-700: #334155;
   --color-slate-800: #1e293b;
   --color-slate-900: #0f172a;
-  --color-slate-950: #0f172a;
-  /* Changed from #020617 to slate-900 value to lighten up */
+}
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-main: #f1f5f9;
+  --bg-input: #f8fafc;
+  --bg-nav: rgba(255, 255, 255, 0.95);
+}
+
+.dark {
+  --bg-main: #020617;
+  /* Deep Navy Blue */
+  --bg-card: #0f172a;
+  /* Slate 900 */
+  --bg-sidebar: #020617;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-main: #1e293b;
+  /* Slate 800 */
+  --bg-input: #0f172a;
+  --bg-nav: rgba(2, 6, 23, 0.9);
+
+  /* Override color-slate for dark mode where needed */
+  --color-slate-50: #020617;
+  --color-slate-100: #1e293b;
+  --color-slate-900: #f8fafc;
 }
 
 @layer base {
   * {
     box-sizing: border-box;
+    border-color: var(--border-main);
   }
 
   html {
@@ -31,12 +77,15 @@
   }
 
   body {
-    @apply bg-slate-900 text-white antialiased;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    @apply antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   ::selection {
-    @apply bg-rose-500/30 text-white;
+    @apply bg-rose-500/20;
+    color: var(--text-main);
   }
 
   ::-webkit-scrollbar {
@@ -45,15 +94,82 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    background-color: var(--bg-main);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700 rounded-full;
+    @apply bg-slate-300 rounded-full dark:bg-slate-800;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-600;
+    @apply bg-slate-400 dark:bg-slate-700;
+  }
+
+  /* Standard Component Overrides */
+  .bg-white {
+    background-color: var(--bg-card) !important;
+  }
+
+  .bg-slate-50 {
+    background-color: var(--bg-main) !important;
+  }
+
+  .bg-slate-900 {
+    background-color: var(--bg-card) !important;
+  }
+
+  .bg-slate-950 {
+    background-color: var(--bg-main) !important;
+  }
+
+  .text-white {
+    color: var(--text-main) !important;
+  }
+
+  /* CAUTION: this might affect intentional whites */
+  .text-slate-900 {
+    color: var(--text-main) !important;
+  }
+
+  .text-slate-500 {
+    color: var(--text-muted) !important;
+  }
+
+  .text-slate-600 {
+    color: var(--text-muted) !important;
+  }
+
+  .text-slate-400 {
+    color: var(--text-muted) !important;
+  }
+
+  .border-slate-100 {
+    border-color: var(--border-main) !important;
+  }
+
+  .border-slate-800 {
+    border-color: var(--border-main) !important;
+  }
+
+  .bg-slate-100 {
+    background-color: var(--border-main) !important;
+  }
+
+  .bg-slate-200 {
+    background-color: var(--color-slate-200) !important;
+  }
+
+  .bg-slate-800 {
+    background-color: var(--color-slate-800) !important;
+  }
+
+  /* Buttons and specific text that should stay white in dark mode */
+  .bg-rose-500 .text-white,
+  .bg-rose-600 .text-white,
+  .bg-gradient-to-br .text-white,
+  button.bg-rose-500,
+  button.bg-rose-600 {
+    color: white !important;
   }
 }
 
@@ -119,11 +235,12 @@
   }
 
   .glass {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+    background-color: var(--bg-nav);
+    @apply backdrop-blur-md border border-white/10 shadow-sm;
   }
 
   .glow-rose {
-    box-shadow: 0 0 40px -10px theme('colors.rose.500');
+    box-shadow: 0 10px 40px -10px rgba(244, 63, 94, 0.2);
   }
 
   .line-clamp-2 {
@@ -138,5 +255,68 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Themed Gradients */
+  .gradient-welcome {
+    @apply bg-gradient-to-br from-white via-slate-50 to-rose-50 border-slate-100;
+  }
+
+  .dark .gradient-welcome {
+    background-color: #0f172a !important;
+    /* solid color */
+    background-image: none !important;
+    border-color: #1e293b !important;
+  }
+
+  .gradient-quick-access {
+    @apply transition-all duration-200;
+  }
+
+  /* Variations will be handled via CSS variables or specific overrides */
+  .gradient-rose {
+    @apply from-rose-50 to-rose-100/30 border-rose-100 text-rose-600;
+  }
+
+  .gradient-blue {
+    @apply from-blue-50 to-blue-100/30 border-blue-100 text-blue-600;
+  }
+
+  .gradient-violet {
+    @apply from-violet-50 to-violet-100/30 border-violet-100 text-violet-600;
+  }
+
+  .gradient-amber {
+    @apply from-amber-50 to-amber-100/30 border-amber-100 text-amber-600;
+  }
+
+  .dark .gradient-rose,
+  .dark .gradient-blue,
+  .dark .gradient-violet,
+  .dark .gradient-amber {
+    background-color: #0f172a !important;
+    background-image: none !important;
+    border-color: #1e293b !important;
+    color: #f8fafc !important;
+  }
+
+  .dark .gradient-rose svg,
+  .dark .gradient-blue svg,
+  .dark .gradient-violet svg,
+  .dark .gradient-amber svg {
+    color: var(--color-rose-500) !important;
+    /* Keep rose icons for brand consistency */
+  }
+
+  /* Specific Dark Blue Overrides for Dashboard */
+  .dark .stats-icon-bg {
+    background-color: #0f172a !important;
+    /* Deep Navy */
+    border-color: #1e293b !important;
+  }
+
+  .dark .suggestion-overlay {
+    background-image: none !important;
+    background-color: transparent !important;
   }
 }
