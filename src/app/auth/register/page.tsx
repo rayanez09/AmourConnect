@@ -28,7 +28,7 @@ export default function RegisterPage() {
 
     const onSubmit = async (data: RegisterInput) => {
         const supabase = createClient()
-        const { error: err } = await supabase.auth.signUp({
+        const { data: authData, error: err } = await supabase.auth.signUp({
             email: data.email,
             password: data.password,
             options: {
@@ -45,8 +45,15 @@ export default function RegisterPage() {
             return
         }
 
-        setEmailSent(true)
-        success('Compte créé !', 'Vérifiez votre boîte mail pour confirmer votre adresse.')
+        // Si la session est retournée, cela signifie que la confirmation d'email est désactivée
+        if (authData.session) {
+            success('Compte créé !', 'Bienvenue sur AmourConnect.')
+            router.push('/profile/setup')
+        } else {
+            // Même si Supabase demande une confirmation, on redirige vers le login
+            success('Compte créé !', 'Vous pouvez maintenant vous connecter.')
+            router.push('/auth/login')
+        }
     }
 
     if (emailSent) {
