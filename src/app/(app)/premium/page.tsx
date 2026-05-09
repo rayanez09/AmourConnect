@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import PremiumClient from './PremiumClient'
+import PremiumClient from '@/app/(app)/premium/PremiumClient'
 
 export const metadata: Metadata = { title: 'Premium – AmourConnect' }
 
