@@ -40,18 +40,20 @@ export default function PremiumClient() {
             return
         }
 
-        const widget = window.FedaPay.init({
-            public_key: process.env.NEXT_PUBLIC_FEDAPAY_PUBLIC_KEY,
-            transaction: {
-                amount: amount,
-                description: `Abonnement Premium - ${planName}`,
-            },
-            customer: {
-                firstname: profile.full_name || 'Utilisateur',
-                lastname: 'AmourConnect',
-                email: 'client@amourconnect.com'
-            },
-            onComplete: async function (resp: any) {
+        try {
+            const widget = window.FedaPay.init({
+                public_key: process.env.NEXT_PUBLIC_FEDAPAY_PUBLIC_KEY,
+                environment: process.env.NEXT_PUBLIC_FEDAPAY_ENVIRONMENT || 'live',
+                transaction: {
+                    amount: amount,
+                    description: `Abonnement Premium - ${planName}`,
+                },
+                customer: {
+                    firstname: profile.full_name || 'Utilisateur',
+                    lastname: 'AmourConnect',
+                    email: 'client@amourconnect.com'
+                },
+                onComplete: async function (resp: any) {
                 if (resp.reason === 'CHECKOUT COMPLETE') {
                     setIsLoading(true)
                     toast.info("Vérification du paiement en cours...")
@@ -87,6 +89,10 @@ export default function PremiumClient() {
         })
         
         widget.open()
+        } catch (error) {
+            console.error("Erreur d'initialisation FedaPay:", error)
+            toast.error("Impossible d'ouvrir le module de paiement.")
+        }
     }
 
     return (
