@@ -136,9 +136,9 @@ export default function PremiumClient() {
             {/* Pricing cards */}
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
                 {[
-                    { period: '1 mois', amount: 20000, price: '20 000 FCFA', pricePerMonth: '20 000 FCFA/mois', badge: null },
-                    { period: '3 mois', amount: 50000, price: '50 000 FCFA', pricePerMonth: '16 500 FCFA/mois', badge: 'Populaire', icon: Zap, save: 'Économisez 20%' },
-                    { period: '6 mois', amount: 90000, price: '90 000 FCFA', pricePerMonth: '15 000 FCFA/mois', badge: 'Meilleur prix', icon: Star, save: 'Économisez 30%' },
+                    { period: '1 mois (Test)', amount: 1000, price: '1 000 FCFA', pricePerMonth: '1 000 FCFA/mois', badge: null },
+                    { period: '3 mois (Test)', amount: 2500, price: '2 500 FCFA', pricePerMonth: '833 FCFA/mois', badge: 'Populaire', icon: Zap, save: 'Économisez 20%' },
+                    { period: '6 mois (Test)', amount: 4500, price: '4 500 FCFA', pricePerMonth: '750 FCFA/mois', badge: 'Meilleur prix', icon: Star, save: 'Économisez 30%' },
                 ].map((plan) => (
                     <div
                         key={plan.period}
