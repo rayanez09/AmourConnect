@@ -43,7 +43,7 @@ export default function PremiumClient() {
 
         try {
             const widget = window.FedaPay.init({
-                public_key: process.env.NEXT_PUBLIC_FEDAPAY_PUBLIC_KEY,
+                public_key: process.env.NEXT_PUBLIC_FEDAPAY_PUBLIC_KEY || 'pk_live_TAPHMS91-KBUdAPvP2iB_0lv',
                 environment: process.env.NEXT_PUBLIC_FEDAPAY_ENVIRONMENT || 'live',
                 transaction: {
                     amount: amount,
