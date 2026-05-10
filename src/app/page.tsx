@@ -144,7 +144,7 @@ const marqueeImages = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-100 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-sm">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 h-20 flex items-center justify-between">
@@ -298,7 +298,7 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f) => (
-              <Card key={f.title} className={`border border-slate-100 bg-white shadow-sm hover:shadow-md transition-shadow`}>
+              <Card key={f.title} className={`border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow`}>
                 <CardContent className="pt-8 pb-8 px-6">
                   <div className={`h-14 w-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6`}>
                     <f.icon className={`h-7 w-7 ${f.color.replace('-400', '-500')}`} />
@@ -326,7 +326,7 @@ export default function HomePage() {
               { name: "Thomas R.", age: 28, city: "Cotonou", text: "Ce que j'apprécie c'est la qualité des membres. On sent que les gens sont vraiment là pour une relation sérieuse.", img: "/photos/Handsome Man.jpg" },
               { name: "Camille L.", age: 35, city: "Abidjan", text: "La sécurité du site m'a donné confiance dès le départ. Je recommande à toutes mes amies célibataires !", img: "/photos/télécharger (11).jpg" }
             ].map((t, i) => (
-              <Card key={t.name} className="bg-white border-slate-100 shadow-sm overflow-hidden relative group">
+              <Card key={t.name} className="bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden relative group">
                 {/* Decorative image background on hover */}
                 <div className="absolute inset-x-0 top-0 h-24 opacity-5 group-hover:opacity-10 transition-opacity">
                   <img src={t.img} alt="" className="w-full h-full object-cover" />
@@ -339,13 +339,13 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-slate-600 text-lg italic leading-relaxed mb-6">"{t.text}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="h-14 w-14 rounded-full bg-slate-50 flex items-center justify-center text-lg font-bold text-white shadow-md overflow-hidden border-2 border-slate-100">
+                    <div className="flex items-center gap-4">
+                    <div className="h-14 w-14 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-lg font-bold text-white shadow-md overflow-hidden border-2 border-slate-100 dark:border-slate-700">
                       <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <p className="text-base font-bold text-slate-900">{t.name}</p>
-                      <p className="text-sm text-slate-500">{t.age} ans · {t.city}</p>
+                      <p className="text-base font-bold text-slate-900 dark:text-white">{t.name}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400">{t.age} ans · {t.city}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -370,8 +370,8 @@ export default function HomePage() {
               <div
                 key={plan.name}
                 className={`relative rounded-3xl border p-10 shadow-sm ${plan.popular
-                  ? 'border-rose-200 bg-gradient-to-br from-white to-rose-50'
-                  : 'border-slate-100 bg-white'
+                  ? 'border-rose-200 dark:border-rose-900/50 bg-gradient-to-br from-white to-rose-50 dark:from-slate-900 dark:to-rose-950/20'
+                  : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900'
                   }`}
               >
                 {plan.popular && (
@@ -410,7 +410,7 @@ export default function HomePage() {
       </section>
 
       {/* Infinite Scroll Photo Marquee */}
-      <section className="py-16 border-t border-slate-100 bg-white relative overflow-hidden">
+      <section className="py-16 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950 relative overflow-hidden">
         <style dangerouslySetInnerHTML={{
           __html: `
           @keyframes marquee {
@@ -432,7 +432,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 border-y border-slate-100 relative">
+      <section className="py-16 border-y border-slate-100 dark:border-slate-800 relative">
         <div className="max-w-5xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
             {stats.map(({ value, label }) => (
@@ -451,7 +451,7 @@ export default function HomePage() {
           <div className="inline-flex p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 mb-6 group-hover:bg-rose-100 transition-colors cursor-pointer">
             <Heart className="h-8 w-8 text-rose-500 fill-rose-500 animate-pulse" />
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 mb-4 sm:mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4 sm:mb-6 leading-tight">
             Prêt(e) à trouver l'amour ?
           </h2>
           <p className="text-slate-500 text-lg sm:text-xl font-medium mb-8 sm:mb-10 px-4">
@@ -480,7 +480,7 @@ export default function HomePage() {
               <p className="text-slate-500 text-sm sm:text-base leading-relaxed">Le site de rencontres conçu pour les célibataires sérieux en Afrique.</p>
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-lg mb-5 uppercase tracking-wide">Plateforme</h4>
+              <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-5 uppercase tracking-wide">Plateforme</h4>
               <ul className="space-y-3 text-base text-slate-500">
                 <li><a href="/auth/register" className="hover:text-rose-600 transition-colors">S'inscrire</a></li>
                 <li><a href="/auth/login" className="hover:text-rose-600 transition-colors">Se connecter</a></li>
@@ -488,7 +488,7 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-lg mb-5 uppercase tracking-wide">Légal</h4>
+              <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-5 uppercase tracking-wide">Légal</h4>
               <ul className="space-y-3 text-base text-slate-500">
                 <li><a href="/legal/privacy" className="hover:text-rose-600 transition-colors">Confidentialité</a></li>
                 <li><a href="/legal/terms" className="hover:text-rose-600 transition-colors">CGU</a></li>
@@ -496,8 +496,8 @@ export default function HomePage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-lg mb-5 uppercase tracking-wide">Sécurité</h4>
-              <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100 text-sm text-slate-600">
+              <h4 className="font-bold text-slate-900 dark:text-white text-lg mb-5 uppercase tracking-wide">Sécurité</h4>
+              <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 text-sm text-slate-600 dark:text-slate-400">
                 <Lock className="h-5 w-5 text-emerald-500 flex-shrink-0" />
                 <span>Données chiffrées et protégées selon le RGPD. Confidentialité garantie.</span>
               </div>

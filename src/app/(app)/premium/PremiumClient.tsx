@@ -90,7 +90,7 @@ export default function PremiumClient() {
 
     return (
         <div className="max-w-3xl mx-auto px-4 py-12">
-            <Script src="https://checkout.fedapay.com/js/checkout.js" strategy="lazyOnload" />
+            <Script src="https://checkout.fedapay.com/js/checkout.js" strategy="afterInteractive" />
             
             {/* Header */}
             <div className="text-center mb-12">
@@ -98,10 +98,10 @@ export default function PremiumClient() {
                     <Crown className="h-4 w-4" />
                     Passer Premium
                 </div>
-                <h1 className="text-4xl font-bold text-slate-900 mb-4">
+                <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">
                     Maximisez vos chances de rencontre
                 </h1>
-                <p className="text-slate-500 text-lg">
+                <p className="text-slate-500 dark:text-slate-400 text-lg">
                     Déverrouillez toutes les fonctionnalités et trouvez l'âme sœur plus rapidement.
                 </p>
             </div>
@@ -111,14 +111,14 @@ export default function PremiumClient() {
                 {premiumFeatures.map((f) => (
                     <div
                         key={f.label}
-                        className="flex items-start gap-4 p-4 rounded-2xl border border-slate-100 bg-white shadow-sm"
+                        className="flex items-start gap-4 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm"
                     >
                         <div className="h-10 w-10 rounded-xl bg-rose-50 flex items-center justify-center flex-shrink-0">
                             <f.icon className="h-5 w-5 text-rose-500" />
                         </div>
                         <div>
-                            <p className="font-semibold text-slate-900">{f.label}</p>
-                            <p className="text-sm text-slate-500 mt-0.5">{f.desc}</p>
+                            <p className="font-semibold text-slate-900 dark:text-white">{f.label}</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{f.desc}</p>
                         </div>
                     </div>
                 ))}
@@ -133,9 +133,9 @@ export default function PremiumClient() {
                 ].map((plan) => (
                     <div
                         key={plan.period}
-                        className={`relative rounded-2xl border p-6 text-center shadow-sm ${plan.badge
-                            ? 'border-amber-200 bg-gradient-to-br from-white to-amber-50'
-                            : 'border-slate-100 bg-white'
+                        className={`relative rounded-2xl border p-6 text-center shadow-sm transition-colors ${plan.badge
+                            ? 'border-amber-200 dark:border-amber-900/50 bg-gradient-to-br from-white to-amber-50 dark:from-slate-900 dark:to-amber-950/20'
+                            : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900'
                             }`}
                     >
                         {plan.badge && (
@@ -146,9 +146,9 @@ export default function PremiumClient() {
                                 </span>
                             </div>
                         )}
-                        <div className="text-sm text-slate-500 mb-2">{plan.period}</div>
-                        <div className="text-3xl font-bold text-slate-900 mb-1">{plan.price}</div>
-                        <div className="text-sm text-slate-500 mb-1">{plan.pricePerMonth}</div>
+                        <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">{plan.period}</div>
+                        <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">{plan.price}</div>
+                        <div className="text-sm text-slate-500 dark:text-slate-400 mb-1">{plan.pricePerMonth}</div>
                         {plan.save && (
                             <div className="text-xs text-emerald-400 font-medium mb-4">{plan.save}</div>
                         )}
@@ -166,8 +166,8 @@ export default function PremiumClient() {
             </div>
 
             {/* Simulation notice */}
-            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-center">
-                <p className="text-blue-600 text-sm">
+            <div className="rounded-2xl border border-blue-100 dark:border-blue-900/50 bg-blue-50 dark:bg-blue-950/30 p-4 text-center">
+                <p className="text-blue-600 dark:text-blue-400 text-sm">
                     💡 <strong>Paiements sécurisés</strong> — Les transactions sont traitées de manière sécurisée par FedaPay (Mobile Money & Cartes).
                 </p>
             </div>
