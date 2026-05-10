@@ -48,7 +48,8 @@ export default function PremiumClient() {
             },
             customer: {
                 firstname: profile.full_name || 'Utilisateur',
-                lastname: 'AmourConnect'
+                lastname: 'AmourConnect',
+                email: 'client@amourconnect.com'
             },
             onComplete: async function (resp: any) {
                 if (resp.reason === 'CHECKOUT COMPLETE') {
@@ -134,7 +135,7 @@ export default function PremiumClient() {
                     <div
                         key={plan.period}
                         className={`relative rounded-2xl border p-6 text-center shadow-sm transition-colors ${plan.badge
-                            ? 'border-amber-200 dark:border-amber-900/50 bg-gradient-to-br from-white to-amber-50 dark:from-slate-900 dark:to-amber-950/20'
+                            ? 'border-amber-200 dark:border-amber-900/50 bg-gradient-to-br from-white to-amber-50 dark:bg-slate-900 dark:bg-none'
                             : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900'
                             }`}
                     >
