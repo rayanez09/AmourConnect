@@ -5,8 +5,8 @@ import Script from 'next/script'
 import { useRouter } from 'next/navigation'
 import { Crown, Check, Zap, Heart, Star, Shield, Eye, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { useToast } from '@/components/ui/Toast'
 import { useAuth } from '@/hooks/useAuth'
-import { toast } from 'sonner'
 
 declare global {
     interface Window {
@@ -25,18 +25,19 @@ const premiumFeatures = [
 
 export default function PremiumClient() {
     const { profile } = useAuth()
+    const { success, error, info } = useToast()
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSubscribe = (amount: number, planName: string) => {
         if (!profile) {
-            toast.error("Veuillez vous connecter pour vous abonner")
+            error("Veuillez vous connecter", "Vous devez être connecté pour vous abonner.")
             router.push('/auth/login')
             return
         }
 
         if (typeof window.FedaPay === 'undefined') {
-            toast.error("Le module de paiement n'est pas encore prêt. Veuillez réessayer dans un instant.")
+            error("Chargement en cours", "Le module de paiement n'est pas encore prêt. Veuillez réessayer dans un instant.")
             return
         }
 
@@ -56,7 +57,7 @@ export default function PremiumClient() {
                 onComplete: async function (resp: any) {
                 if (resp.reason === 'CHECKOUT COMPLETE') {
                     setIsLoading(true)
-                    toast.info("Vérification du paiement en cours...")
+                    info("Paiement en cours", "Vérification du paiement en cours...")
                     
                     try {
                         const res = await fetch('/api/fedapay/verify', {
@@ -70,28 +71,29 @@ export default function PremiumClient() {
                         })
                         
                         if (res.ok) {
-                            toast.success("Paiement réussi ! Vous êtes maintenant Premium.")
+                            success("Succès", "Paiement réussi ! Vous êtes maintenant Premium.")
                             router.push('/dashboard')
                             router.refresh()
                         } else {
-                            toast.error("Erreur lors de la vérification du paiement sur le serveur.")
+                            error("Échec", "Erreur lors de la vérification du paiement sur le serveur.")
                         }
                     } catch (e) {
                         console.error(e)
-                        toast.error("Erreur système lors de la vérification.")
+                        error("Erreur serveur", "Erreur système lors de la vérification.")
                     } finally {
                         setIsLoading(false)
                     }
                 } else {
-                    toast.error("Le paiement n'a pas été finalisé.")
+                    error("Annulé", "Le paiement n'a pas été finalisé.")
                 }
             }
         })
         
         widget.open()
-        } catch (error) {
-            console.error("Erreur d'initialisation FedaPay:", error)
-            toast.error("Impossible d'ouvrir le module de paiement.")
+        widget.open()
+        } catch (err) {
+            console.error("Erreur d'initialisation FedaPay:", err)
+            error("Erreur", "Impossible d'ouvrir le module de paiement.")
         }
     }
 
