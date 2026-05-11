@@ -136,14 +136,14 @@ export default function PremiumClient() {
             {/* Pricing cards */}
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
                 {[
-                    { period: '1 mois (Test)', amount: 1000, price: '1 000 FCFA', pricePerMonth: '1 000 FCFA/mois', badge: null },
-                    { period: '3 mois (Test)', amount: 2500, price: '2 500 FCFA', pricePerMonth: '833 FCFA/mois', badge: 'Populaire', icon: Zap, save: 'Économisez 20%' },
-                    { period: '6 mois (Test)', amount: 4500, price: '4 500 FCFA', pricePerMonth: '750 FCFA/mois', badge: 'Meilleur prix', icon: Star, save: 'Économisez 30%' },
+                    { period: '1 mois (Test)', amount: 50, price: '50 FCFA', pricePerMonth: '50 FCFA/mois', badge: null },
+                    { period: '3 mois (Test)', amount: 100, price: '100 FCFA', pricePerMonth: '33 FCFA/mois', badge: 'Populaire', icon: Zap, save: 'Économisez 20%' },
+                    { period: '6 mois (Test)', amount: 200, price: '200 FCFA', pricePerMonth: '33 FCFA/mois', badge: 'Meilleur prix', icon: Star, save: 'Économisez 30%' },
                 ].map((plan) => (
                     <div
                         key={plan.period}
                         className={`relative rounded-2xl border p-6 text-center shadow-sm transition-colors ${plan.badge
-                            ? 'border-amber-200 dark:border-amber-900/50 bg-gradient-to-br from-white to-amber-50 dark:bg-slate-900 dark:bg-none'
+                            ? 'border-amber-200 dark:border-amber-900/50 bg-white dark:bg-slate-900'
                             : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900'
                             }`}
                     >
